@@ -45,6 +45,8 @@ namespace HighlightHelper
             this.labelWorkingDir = new System.Windows.Forms.Label();
             this.labelActiveProfile = new System.Windows.Forms.Label();
             this.labelCountProfile = new System.Windows.Forms.Label();
+            this.btnCheckUpd = new System.Windows.Forms.Button();
+            this.btnShuffler = new System.Windows.Forms.Button();
             this.groupBoxBtn.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -160,9 +162,9 @@ namespace HighlightHelper
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F);
             this.label4.Location = new System.Drawing.Point(12, 168);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(236, 20);
+            this.label4.Size = new System.Drawing.Size(182, 20);
             this.label4.TabIndex = 9;
-            this.label4.Text = "程序版本：Release 210112 HOTFIX";
+            this.label4.Text = "程序版本：Release 210120";
             // 
             // label5
             // 
@@ -199,13 +201,39 @@ namespace HighlightHelper
             this.labelCountProfile.Size = new System.Drawing.Size(0, 20);
             this.labelCountProfile.TabIndex = 13;
             // 
+            // btnCheckUpd
+            // 
+            this.btnCheckUpd.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCheckUpd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckUpd.Location = new System.Drawing.Point(225, 213);
+            this.btnCheckUpd.Name = "btnCheckUpd";
+            this.btnCheckUpd.Size = new System.Drawing.Size(168, 31);
+            this.btnCheckUpd.TabIndex = 14;
+            this.btnCheckUpd.Text = "Github 主页";
+            this.btnCheckUpd.UseVisualStyleBackColor = true;
+            this.btnCheckUpd.Click += new System.EventHandler(this.btnCheckUpd_Click);
+            // 
+            // btnShuffler
+            // 
+            this.btnShuffler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnShuffler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShuffler.Location = new System.Drawing.Point(12, 213);
+            this.btnShuffler.Name = "btnShuffler";
+            this.btnShuffler.Size = new System.Drawing.Size(168, 31);
+            this.btnShuffler.TabIndex = 6;
+            this.btnShuffler.Text = "工具: 连词成句";
+            this.btnShuffler.UseVisualStyleBackColor = true;
+            this.btnShuffler.Click += new System.EventHandler(this.btnShuffler_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.CancelButton = this.btnQuit;
-            this.ClientSize = new System.Drawing.Size(405, 222);
+            this.ClientSize = new System.Drawing.Size(405, 256);
+            this.Controls.Add(this.btnCheckUpd);
+            this.Controls.Add(this.btnShuffler);
             this.Controls.Add(this.labelCountProfile);
             this.Controls.Add(this.labelActiveProfile);
             this.Controls.Add(this.labelWorkingDir);
@@ -249,6 +277,8 @@ namespace HighlightHelper
         private System.Windows.Forms.Label labelActiveProfile;
         private System.Windows.Forms.Label labelCountProfile;
         private System.Windows.Forms.Button btnDeleteProfile;
+        private System.Windows.Forms.Button btnCheckUpd;
+        private System.Windows.Forms.Button btnShuffler;
     }
 }
 

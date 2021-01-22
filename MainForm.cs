@@ -140,5 +140,13 @@ namespace HighlightHelper {
                 WriteProfiles();
             }
         }
+
+        private void btnShuffler_Click(object sender, EventArgs e) {
+            (new Shuffler()).ShowDialog();
+        }
+
+        private void btnCheckUpd_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/ImChinaNB/HighlightHelper");
+        }
     }
 }
