@@ -8,9 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 
 namespace HighlightHelper {
     public partial class MainForm : Form {
+        private readonly Version versionA = new Version(1, 1, 0, 0);
+        private readonly string versionB = "Release 2020/01/31";
+
         private readonly string DataFile = "data.bin";
         private bool ischanging = false;
         private List<HighlightProfile> profiles = new List<HighlightProfile>();
@@ -86,6 +90,11 @@ namespace HighlightHelper {
             // Init profile array.
             ReadProfiles();
             UpdateDisplay();
+
+            label4.Text = "程序版本：[" + versionA.ToString() + "] " + versionB;
+
+            AutoUpdater.InstalledVersion = versionA;
+            AutoUpdater.Start("https://proj.imchinanb.xyz/update.xml");
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {

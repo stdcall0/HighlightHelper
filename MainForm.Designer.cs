@@ -159,12 +159,12 @@ namespace HighlightHelper
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F);
             this.label4.Location = new System.Drawing.Point(12, 168);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(182, 20);
+            this.label4.Size = new System.Drawing.Size(79, 20);
             this.label4.TabIndex = 9;
-            this.label4.Text = "程序版本：Release 210120";
+            this.label4.Text = "程序版本：";
             // 
             // label5
             // 
@@ -178,7 +178,7 @@ namespace HighlightHelper
             // labelWorkingDir
             // 
             this.labelWorkingDir.AutoSize = true;
-            this.labelWorkingDir.Font = new System.Drawing.Font("微软雅黑", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelWorkingDir.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelWorkingDir.Location = new System.Drawing.Point(83, 191);
             this.labelWorkingDir.Name = "labelWorkingDir";
             this.labelWorkingDir.Size = new System.Drawing.Size(0, 16);
@@ -245,7 +245,7 @@ namespace HighlightHelper
             this.Controls.Add(this.label1);
             this.Controls.Add(this.profileBox);
             this.Controls.Add(this.groupBoxBtn);
-            this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
