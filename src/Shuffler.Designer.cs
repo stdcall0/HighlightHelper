@@ -34,6 +34,8 @@ namespace HighlightHelper {
             this.label3 = new System.Windows.Forms.Label();
             this.valOutput = new System.Windows.Forms.TextBox();
             this.btnDoit = new System.Windows.Forms.Button();
+            this.valUpcase = new System.Windows.Forms.CheckBox();
+            this.valSplitSent = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.valFirstNumber)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,7 +77,7 @@ namespace HighlightHelper {
             this.valAddMark.Checked = true;
             this.valAddMark.CheckState = System.Windows.Forms.CheckState.Checked;
             this.valAddMark.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valAddMark.Location = new System.Drawing.Point(140, 357);
+            this.valAddMark.Location = new System.Drawing.Point(116, 357);
             this.valAddMark.Name = "valAddMark";
             this.valAddMark.Size = new System.Drawing.Size(112, 24);
             this.valAddMark.TabIndex = 3;
@@ -89,7 +91,7 @@ namespace HighlightHelper {
             this.valFixChnSymbol.CheckState = System.Windows.Forms.CheckState.Checked;
             this.valFixChnSymbol.Enabled = false;
             this.valFixChnSymbol.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valFixChnSymbol.Location = new System.Drawing.Point(277, 357);
+            this.valFixChnSymbol.Location = new System.Drawing.Point(239, 357);
             this.valFixChnSymbol.Name = "valFixChnSymbol";
             this.valFixChnSymbol.Size = new System.Drawing.Size(112, 24);
             this.valFixChnSymbol.TabIndex = 4;
@@ -151,12 +153,38 @@ namespace HighlightHelper {
             this.btnDoit.UseVisualStyleBackColor = true;
             this.btnDoit.Click += new System.EventHandler(this.btnDoit_Click);
             // 
+            // valUpcase
+            // 
+            this.valUpcase.AutoSize = true;
+            this.valUpcase.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.valUpcase.Location = new System.Drawing.Point(359, 357);
+            this.valUpcase.Name = "valUpcase";
+            this.valUpcase.Size = new System.Drawing.Size(98, 24);
+            this.valUpcase.TabIndex = 10;
+            this.valUpcase.Text = "处理大小写";
+            this.valUpcase.UseVisualStyleBackColor = true;
+            // 
+            // valSplitSent
+            // 
+            this.valSplitSent.AutoSize = true;
+            this.valSplitSent.Checked = true;
+            this.valSplitSent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.valSplitSent.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.valSplitSent.Location = new System.Drawing.Point(471, 356);
+            this.valSplitSent.Name = "valSplitSent";
+            this.valSplitSent.Size = new System.Drawing.Size(84, 24);
+            this.valSplitSent.TabIndex = 11;
+            this.valSplitSent.Text = "自动分句";
+            this.valSplitSent.UseVisualStyleBackColor = true;
+            // 
             // Shuffler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
             this.ClientSize = new System.Drawing.Size(800, 397);
+            this.Controls.Add(this.valSplitSent);
+            this.Controls.Add(this.valUpcase);
             this.Controls.Add(this.btnDoit);
             this.Controls.Add(this.valOutput);
             this.Controls.Add(this.label3);
@@ -188,5 +216,7 @@ namespace HighlightHelper {
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox valOutput;
         private System.Windows.Forms.Button btnDoit;
+        private System.Windows.Forms.CheckBox valUpcase;
+        private System.Windows.Forms.CheckBox valSplitSent;
     }
 }

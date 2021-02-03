@@ -30,7 +30,9 @@ namespace HighlightHelper {
         }
 
         private void btnDoit_Click(object sender, EventArgs e) {
-            List<string> sent = valSent.Text.Split('\n').ToList();
+            List<string> sent;
+            if (valSplitSent.Checked) sent = valSent.Text.Split(new[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).ToList().ConvertAll(w => w.Trim().Replace("\n", "") + valSent.Text[valSent.Text.IndexOf(w) + w.Length]);
+            else sent = valSent.Text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             string o = "";
             int id = (int)valFirstNumber.Value;
             bool numb = valAddNumber.Checked;
@@ -38,9 +40,9 @@ namespace HighlightHelper {
             foreach (string s in sent) {
                 if (string.IsNullOrWhiteSpace(s)) continue;
                 List<string> w = s.Split(' ').ToList();
-                w[0] = w[0].ToLower();
-                w = w.ConvertAll(Ao => Ao.Trim().Replace('　', ' ').Replace('？', '?').Replace('。', '.').Replace('，', ','));
-                List<string> w2 = w.ConvertAll(Ao => Ao.Replace("?", "").Replace("!", "").Replace(",", "").Replace(".", ""));
+                if (valUpcase.Checked) w[0] = w[0].ToLower();
+                w = w.ConvertAll(Ao => Ao.Trim().Replace('　', ' ').Replace('？', '?').Replace('。', '.').Replace('，', ',').Replace("“", "\"").Replace("”", "\"").Replace("‘", "'").Replace("’", "'"));
+                List<string> w2 = w.ConvertAll(Ao => Ao.Replace("?", "").Replace("!", "").Replace(",", "").Replace(".", "").Replace("\"", ""));
                 ShuffleList(w2);
                 string ap = string.Join(" ", w2);
                 if (mark) {
@@ -48,7 +50,7 @@ namespace HighlightHelper {
                     string om = "  (";
                     int i = 0;
                     while (i < dest.Length) {
-                        i = dest.IndexOfAny(new[] { ',', '.', '!', '?'}, i);
+                        i = dest.IndexOfAny(new[] { ',', '.', '!', '?', '"'}, i);
                         if (i != -1) {
                             om += dest[i];
                             i = i + 1;
