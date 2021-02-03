@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
@@ -135,9 +130,6 @@ namespace HighlightHelper {
         }
 
         private void btnSelectProfile_Click(object sender, EventArgs e) {
-            // if (activeIndex < 0 || activeIndex >= profiles.Count) return;
-            // int a=0, b=0, c=0; profiles[activeIndex].Activate(ref a, ref b, ref c);
-            // MessageBox.Show(this, String.Format("成功激活此配置，包含 {0} 个单词，{1} 个特殊单词，{2} 个短语。",a,b,c), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ActivateForm af = new ActivateForm(profiles);
             af.ShowDialog();
         }
