@@ -31,7 +31,22 @@ namespace HighlightHelper {
 
         private void btnDoit_Click(object sender, EventArgs e) {
             List<string> sent;
-            if (valSplitSent.Checked) sent = valSent.Text.Split(new[] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).ToList().ConvertAll(w => w.Trim().Replace("\n", "") + valSent.Text[valSent.Text.IndexOf(w) + w.Length]);
+            if (valSplitSent.Checked) {
+                string c = valSent.Text;
+                int la = 0;
+                sent = new List<string>();
+                for (int i=0; i < c.Length; ++i) {
+                    if (c[i] == '.' || c[i] == '!' || c[i] == '?') {
+                        string n = c.Substring(la, i - la + 1);
+                        sent.Add(n.Trim().Replace("\n", ""));
+                        la = i + 1;
+                    }
+                }
+                if (la != c.Length) {
+                    string n = c.Substring(la, c.Length - la);
+                    sent.Add(n.Trim().Replace("\n", ""));
+                }
+            }
             else sent = valSent.Text.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             string o = "";
             int id = (int)valFirstNumber.Value;
@@ -62,6 +77,10 @@ namespace HighlightHelper {
                 o += ap + "\r\n"; ++id;
             }
             valOutput.Text = o;
+        }
+
+        private void valSent_TextChanged(object sender, EventArgs e) {
+            btnDoit_Click(sender, e);
         }
     }
 }

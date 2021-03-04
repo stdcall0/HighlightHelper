@@ -7,8 +7,8 @@ using AutoUpdaterDotNET;
 
 namespace HighlightHelper {
     public partial class MainForm : Form {
-        private readonly Version versionA = new Version(1, 1, 1, 0);
-        private readonly string versionB = "Release 2020/02/03";
+        private readonly Version versionA = new Version(1, 1, 2, 0);
+        private readonly string versionB = "Release 21/03/04";
 
         private readonly string DataFile = "data.bin";
         private bool ischanging = false;

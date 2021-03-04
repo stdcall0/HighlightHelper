@@ -42,12 +42,12 @@ namespace HighlightHelper {
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 70);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(38, 79);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 40);
+            this.label1.Size = new System.Drawing.Size(37, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Sentences\r\nOne Per Line\r\n";
+            this.label1.Text = "输入";
             // 
             // valSent
             // 
@@ -57,6 +57,7 @@ namespace HighlightHelper {
             this.valSent.Name = "valSent";
             this.valSent.Size = new System.Drawing.Size(675, 161);
             this.valSent.TabIndex = 1;
+            this.valSent.TextChanged += new System.EventHandler(this.valSent_TextChanged);
             // 
             // valAddNumber
             // 
@@ -124,12 +125,12 @@ namespace HighlightHelper {
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(12, 237);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(38, 250);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 40);
+            this.label3.Size = new System.Drawing.Size(37, 19);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Outputs\r\nOne Per Line\r\n";
+            this.label3.Text = "输出";
             // 
             // valOutput
             // 
