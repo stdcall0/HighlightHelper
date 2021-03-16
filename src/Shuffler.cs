@@ -12,6 +12,12 @@ namespace HighlightHelper {
     }
     private void Shuffler_Load(object sender, EventArgs e) {
       Utils.SetFont(this);
+      foreach (var i in strip.Items.OfType<ToolStripDropDownButton>()) {
+        i.Font = Utils.sarasa;
+        foreach (var j in i.DropDownItems.OfType<ToolStripMenuItem>()) {
+          j.Font = Utils.sarasa;
+        }
+      }
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripMenuItem>()) {
         i.CheckStateChanged += (object s, EventArgs ev) => refresh();
       }

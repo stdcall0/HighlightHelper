@@ -7,7 +7,7 @@ using AutoUpdaterDotNET;
 
 namespace HighlightHelper {
   public partial class MainForm : Form {
-    private readonly Version versionA = new Version(1, 2, 1, 0);
+    private readonly Version versionA = new Version(1, 2, 1, 1);
     private readonly string versionB = "R 210316";
 
     private readonly string DataFile = "data.bin"; // need refactor
