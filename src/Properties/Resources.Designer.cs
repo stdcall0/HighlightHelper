@@ -59,5 +59,15 @@ namespace HighlightHelper.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] sarasa_ui_sc_semibold {
+            get {
+                object obj = ResourceManager.GetObject("sarasa_ui_sc_semibold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -24,253 +24,301 @@ namespace HighlightHelper {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.valSent = new System.Windows.Forms.TextBox();
-            this.valAddNumber = new System.Windows.Forms.CheckBox();
-            this.valAddMark = new System.Windows.Forms.CheckBox();
-            this.valFixChnSymbol = new System.Windows.Forms.CheckBox();
-            this.valFirstNumber = new System.Windows.Forms.NumericUpDown();
-            this.valOutput = new System.Windows.Forms.TextBox();
-            this.btnDoit = new System.Windows.Forms.Button();
-            this.valUpcase = new System.Windows.Forms.CheckBox();
-            this.valNoSplit = new System.Windows.Forms.CheckBox();
-            this.valKeepFirst = new System.Windows.Forms.CheckBox();
-            this.valSort = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.valSplitter = new System.Windows.Forms.TextBox();
-            this.btnCopyOutput = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.valFirstNumber)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // valSent
-            // 
-            this.valSent.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valSent.Location = new System.Drawing.Point(12, 13);
-            this.valSent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valSent.Multiline = true;
-            this.valSent.Name = "valSent";
-            this.valSent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.valSent.Size = new System.Drawing.Size(403, 141);
-            this.valSent.TabIndex = 1;
-            this.valSent.TextChanged += new System.EventHandler(this.valSent_TextChanged);
-            // 
-            // valAddNumber
-            // 
-            this.valAddNumber.AutoSize = true;
-            this.valAddNumber.Checked = true;
-            this.valAddNumber.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.valAddNumber.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valAddNumber.Location = new System.Drawing.Point(12, 324);
-            this.valAddNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valAddNumber.Name = "valAddNumber";
-            this.valAddNumber.Size = new System.Drawing.Size(320, 24);
-            this.valAddNumber.TabIndex = 2;
-            this.valAddNumber.Text = "添加序号，从                                             开始";
-            this.valAddNumber.UseVisualStyleBackColor = true;
-            this.valAddNumber.CheckedChanged += new System.EventHandler(this.valAddNumber_CheckedChanged);
-            // 
-            // valAddMark
-            // 
-            this.valAddMark.AutoSize = true;
-            this.valAddMark.Checked = true;
-            this.valAddMark.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.valAddMark.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valAddMark.Location = new System.Drawing.Point(12, 356);
-            this.valAddMark.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valAddMark.Name = "valAddMark";
-            this.valAddMark.Size = new System.Drawing.Size(112, 24);
-            this.valAddMark.TabIndex = 3;
-            this.valAddMark.Text = "添加标点符号";
-            this.valAddMark.UseVisualStyleBackColor = true;
-            this.valAddMark.CheckedChanged += new System.EventHandler(this.valAddMark_CheckedChanged);
-            // 
-            // valFixChnSymbol
-            // 
-            this.valFixChnSymbol.AutoSize = true;
-            this.valFixChnSymbol.Checked = true;
-            this.valFixChnSymbol.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.valFixChnSymbol.Enabled = false;
-            this.valFixChnSymbol.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valFixChnSymbol.Location = new System.Drawing.Point(130, 356);
-            this.valFixChnSymbol.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valFixChnSymbol.Name = "valFixChnSymbol";
-            this.valFixChnSymbol.Size = new System.Drawing.Size(154, 24);
-            this.valFixChnSymbol.TabIndex = 4;
-            this.valFixChnSymbol.Text = "替换全角标点为半角";
-            this.valFixChnSymbol.UseVisualStyleBackColor = true;
-            this.valFixChnSymbol.CheckedChanged += new System.EventHandler(this.valFixChnSymbol_CheckedChanged);
-            // 
-            // valFirstNumber
-            // 
-            this.valFirstNumber.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valFirstNumber.Location = new System.Drawing.Point(139, 326);
-            this.valFirstNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valFirstNumber.Name = "valFirstNumber";
-            this.valFirstNumber.Size = new System.Drawing.Size(140, 23);
-            this.valFirstNumber.TabIndex = 5;
-            this.valFirstNumber.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.valFirstNumber.ValueChanged += new System.EventHandler(this.valFirstNumber_ValueChanged);
-            // 
-            // valOutput
-            // 
-            this.valOutput.Font = new System.Drawing.Font("Arial", 12F);
-            this.valOutput.Location = new System.Drawing.Point(12, 162);
-            this.valOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valOutput.Multiline = true;
-            this.valOutput.Name = "valOutput";
-            this.valOutput.ReadOnly = true;
-            this.valOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.valOutput.Size = new System.Drawing.Size(403, 141);
-            this.valOutput.TabIndex = 8;
-            // 
-            // btnDoit
-            // 
-            this.btnDoit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDoit.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDoit.Location = new System.Drawing.Point(290, 356);
-            this.btnDoit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDoit.Name = "btnDoit";
-            this.btnDoit.Size = new System.Drawing.Size(125, 47);
-            this.btnDoit.TabIndex = 9;
-            this.btnDoit.Text = "DO IT!";
-            this.btnDoit.UseVisualStyleBackColor = true;
-            this.btnDoit.Click += new System.EventHandler(this.btnDoit_Click);
-            // 
-            // valUpcase
-            // 
-            this.valUpcase.AutoSize = true;
-            this.valUpcase.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valUpcase.Location = new System.Drawing.Point(12, 388);
-            this.valUpcase.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valUpcase.Name = "valUpcase";
-            this.valUpcase.Size = new System.Drawing.Size(112, 24);
-            this.valUpcase.TabIndex = 10;
-            this.valUpcase.Text = "首字母转小写";
-            this.valUpcase.UseVisualStyleBackColor = true;
-            this.valUpcase.CheckedChanged += new System.EventHandler(this.valUpcase_CheckedChanged);
-            // 
-            // valNoSplit
-            // 
-            this.valNoSplit.AutoSize = true;
-            this.valNoSplit.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valNoSplit.Location = new System.Drawing.Point(12, 420);
-            this.valNoSplit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valNoSplit.Name = "valNoSplit";
-            this.valNoSplit.Size = new System.Drawing.Size(98, 24);
-            this.valNoSplit.TabIndex = 11;
-            this.valNoSplit.Text = "每行为一句";
-            this.valNoSplit.UseVisualStyleBackColor = true;
-            this.valNoSplit.CheckedChanged += new System.EventHandler(this.valNoSplit_CheckedChanged);
-            // 
-            // valKeepFirst
-            // 
-            this.valKeepFirst.AutoSize = true;
-            this.valKeepFirst.Checked = true;
-            this.valKeepFirst.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.valKeepFirst.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valKeepFirst.Location = new System.Drawing.Point(130, 388);
-            this.valKeepFirst.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valKeepFirst.Name = "valKeepFirst";
-            this.valKeepFirst.Size = new System.Drawing.Size(126, 24);
-            this.valKeepFirst.TabIndex = 12;
-            this.valKeepFirst.Text = "句首词保持最前";
-            this.valKeepFirst.UseVisualStyleBackColor = true;
-            this.valKeepFirst.CheckedChanged += new System.EventHandler(this.valKeepFirst_CheckedChanged);
-            // 
-            // valSort
-            // 
-            this.valSort.AutoSize = true;
-            this.valSort.Checked = true;
-            this.valSort.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.valSort.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.valSort.Location = new System.Drawing.Point(130, 420);
-            this.valSort.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.valSort.Name = "valSort";
-            this.valSort.Size = new System.Drawing.Size(140, 24);
-            this.valSort.TabIndex = 13;
-            this.valSort.Text = "排序，而不是乱序";
-            this.valSort.UseVisualStyleBackColor = true;
-            this.valSort.CheckedChanged += new System.EventHandler(this.valSort_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F);
-            this.label1.Location = new System.Drawing.Point(17, 448);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 20);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "单词间分隔符";
-            // 
-            // valSplitter
-            // 
-            this.valSplitter.Location = new System.Drawing.Point(130, 449);
-            this.valSplitter.Name = "valSplitter";
-            this.valSplitter.Size = new System.Drawing.Size(140, 21);
-            this.valSplitter.TabIndex = 15;
-            this.valSplitter.Text = ", ";
-            this.valSplitter.TextChanged += new System.EventHandler(this.valSplitter_TextChanged);
-            // 
-            // btnCopyOutput
-            // 
-            this.btnCopyOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCopyOutput.Font = new System.Drawing.Font("Microsoft YaHei", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCopyOutput.Location = new System.Drawing.Point(290, 420);
-            this.btnCopyOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCopyOutput.Name = "btnCopyOutput";
-            this.btnCopyOutput.Size = new System.Drawing.Size(125, 47);
-            this.btnCopyOutput.TabIndex = 16;
-            this.btnCopyOutput.Text = "COPY RESULT";
-            this.btnCopyOutput.UseVisualStyleBackColor = true;
-            this.btnCopyOutput.Click += new System.EventHandler(this.btnCopyOutput_Click);
-            // 
-            // Shuffler
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(429, 480);
-            this.Controls.Add(this.btnCopyOutput);
-            this.Controls.Add(this.valSplitter);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.valSort);
-            this.Controls.Add(this.valKeepFirst);
-            this.Controls.Add(this.valFirstNumber);
-            this.Controls.Add(this.valNoSplit);
-            this.Controls.Add(this.valUpcase);
-            this.Controls.Add(this.btnDoit);
-            this.Controls.Add(this.valOutput);
-            this.Controls.Add(this.valFixChnSymbol);
-            this.Controls.Add(this.valAddMark);
-            this.Controls.Add(this.valAddNumber);
-            this.Controls.Add(this.valSent);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "Shuffler";
-            this.Text = "连词成句助手";
-            ((System.ComponentModel.ISupportInitialize)(this.valFirstNumber)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Shuffler));
+      this.valSent = new System.Windows.Forms.TextBox();
+      this.valOutput = new System.Windows.Forms.TextBox();
+      this.strip = new System.Windows.Forms.ToolStrip();
+      this.toolOpt = new System.Windows.Forms.ToolStripDropDownButton();
+      this.itemAddNumber = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemAddMark = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemFixChnSymbol = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemTolowercase = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemKeepfront = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemAutoSplit = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+      this.itemAsc = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemDesc = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemShuffle = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+      this.btnRefresh = new System.Windows.Forms.ToolStripButton();
+      this.btnCopyResult = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+      this.起始数字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.valFirstNum = new System.Windows.Forms.ToolStripTextBox();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.单词间分隔符ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.valSplitText = new System.Windows.Forms.ToolStripTextBox();
+      this.strip.SuspendLayout();
+      this.SuspendLayout();
+      // 
+      // valSent
+      // 
+      this.valSent.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11F, System.Drawing.FontStyle.Bold);
+      this.valSent.Location = new System.Drawing.Point(13, 31);
+      this.valSent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.valSent.Multiline = true;
+      this.valSent.Name = "valSent";
+      this.valSent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+      this.valSent.Size = new System.Drawing.Size(556, 175);
+      this.valSent.TabIndex = 1;
+      this.valSent.TextChanged += new System.EventHandler(this.valSent_TextChanged);
+      // 
+      // valOutput
+      // 
+      this.valOutput.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11F, System.Drawing.FontStyle.Bold);
+      this.valOutput.Location = new System.Drawing.Point(13, 209);
+      this.valOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.valOutput.Multiline = true;
+      this.valOutput.Name = "valOutput";
+      this.valOutput.ReadOnly = true;
+      this.valOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+      this.valOutput.Size = new System.Drawing.Size(556, 172);
+      this.valOutput.TabIndex = 8;
+      // 
+      // strip
+      // 
+      this.strip.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11F, System.Drawing.FontStyle.Bold);
+      this.strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolOpt,
+            this.toolStripDropDownButton2,
+            this.toolStripSeparator1,
+            this.btnRefresh,
+            this.btnCopyResult});
+      this.strip.Location = new System.Drawing.Point(0, 0);
+      this.strip.Name = "strip";
+      this.strip.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+      this.strip.Size = new System.Drawing.Size(581, 26);
+      this.strip.TabIndex = 17;
+      this.strip.Text = "toolStrip";
+      // 
+      // toolOpt
+      // 
+      this.toolOpt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemAddNumber,
+            this.itemAddMark,
+            this.itemFixChnSymbol,
+            this.itemTolowercase,
+            this.itemKeepfront,
+            this.itemAutoSplit,
+            this.toolStripSeparator2,
+            this.起始数字ToolStripMenuItem,
+            this.valFirstNum,
+            this.toolStripSeparator3,
+            this.单词间分隔符ToolStripMenuItem,
+            this.valSplitText});
+      this.toolOpt.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11F, System.Drawing.FontStyle.Bold);
+      this.toolOpt.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.toolOpt.Name = "toolOpt";
+      this.toolOpt.Size = new System.Drawing.Size(52, 23);
+      this.toolOpt.Text = "选项";
+      // 
+      // itemAddNumber
+      // 
+      this.itemAddNumber.Checked = true;
+      this.itemAddNumber.CheckOnClick = true;
+      this.itemAddNumber.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.itemAddNumber.Name = "itemAddNumber";
+      this.itemAddNumber.Size = new System.Drawing.Size(213, 24);
+      this.itemAddNumber.Text = "添加序号";
+      // 
+      // itemAddMark
+      // 
+      this.itemAddMark.Checked = true;
+      this.itemAddMark.CheckOnClick = true;
+      this.itemAddMark.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.itemAddMark.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+      this.itemAddMark.Name = "itemAddMark";
+      this.itemAddMark.Size = new System.Drawing.Size(213, 24);
+      this.itemAddMark.Text = "添加标点符号";
+      // 
+      // itemFixChnSymbol
+      // 
+      this.itemFixChnSymbol.Checked = true;
+      this.itemFixChnSymbol.CheckOnClick = true;
+      this.itemFixChnSymbol.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.itemFixChnSymbol.Name = "itemFixChnSymbol";
+      this.itemFixChnSymbol.Size = new System.Drawing.Size(213, 24);
+      this.itemFixChnSymbol.Text = "替换全角标点为半角";
+      // 
+      // itemTolowercase
+      // 
+      this.itemTolowercase.CheckOnClick = true;
+      this.itemTolowercase.Name = "itemTolowercase";
+      this.itemTolowercase.Size = new System.Drawing.Size(213, 24);
+      this.itemTolowercase.Text = "首字母转小写";
+      // 
+      // itemKeepfront
+      // 
+      this.itemKeepfront.Checked = true;
+      this.itemKeepfront.CheckOnClick = true;
+      this.itemKeepfront.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.itemKeepfront.Name = "itemKeepfront";
+      this.itemKeepfront.Size = new System.Drawing.Size(213, 24);
+      this.itemKeepfront.Text = "句首词保持最前";
+      // 
+      // itemAutoSplit
+      // 
+      this.itemAutoSplit.Checked = true;
+      this.itemAutoSplit.CheckOnClick = true;
+      this.itemAutoSplit.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.itemAutoSplit.Name = "itemAutoSplit";
+      this.itemAutoSplit.Size = new System.Drawing.Size(213, 24);
+      this.itemAutoSplit.Text = "自动分句";
+      // 
+      // toolStripDropDownButton2
+      // 
+      this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemAsc,
+            this.itemDesc,
+            this.itemShuffle});
+      this.toolStripDropDownButton2.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11F, System.Drawing.FontStyle.Bold);
+      this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+      this.toolStripDropDownButton2.Size = new System.Drawing.Size(52, 23);
+      this.toolStripDropDownButton2.Text = "排序";
+      // 
+      // itemAsc
+      // 
+      this.itemAsc.Checked = true;
+      this.itemAsc.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.itemAsc.Name = "itemAsc";
+      this.itemAsc.Size = new System.Drawing.Size(180, 24);
+      this.itemAsc.Text = "顺序";
+      this.itemAsc.Click += new System.EventHandler(this.itemAsc_Click);
+      // 
+      // itemDesc
+      // 
+      this.itemDesc.Name = "itemDesc";
+      this.itemDesc.Size = new System.Drawing.Size(180, 24);
+      this.itemDesc.Text = "倒序";
+      this.itemDesc.Click += new System.EventHandler(this.itemDesc_Click);
+      // 
+      // itemShuffle
+      // 
+      this.itemShuffle.Name = "itemShuffle";
+      this.itemShuffle.Size = new System.Drawing.Size(180, 24);
+      this.itemShuffle.Text = "乱序";
+      this.itemShuffle.Click += new System.EventHandler(this.itemShuffle_Click);
+      // 
+      // toolStripButton1
+      // 
+      this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+      this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.toolStripButton1.Name = "toolStripButton1";
+      this.toolStripButton1.Size = new System.Drawing.Size(23, 23);
+      this.toolStripButton1.Text = "toolStripButton1";
+      // 
+      // btnRefresh
+      // 
+      this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnRefresh.Name = "btnRefresh";
+      this.btnRefresh.Size = new System.Drawing.Size(43, 23);
+      this.btnRefresh.Text = "刷新";
+      this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+      // 
+      // btnCopyResult
+      // 
+      this.btnCopyResult.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnCopyResult.Name = "btnCopyResult";
+      this.btnCopyResult.Size = new System.Drawing.Size(73, 23);
+      this.btnCopyResult.Text = "复制输出";
+      this.btnCopyResult.Click += new System.EventHandler(this.btnCopyResult_Click);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(6, 26);
+      // 
+      // toolStripSeparator2
+      // 
+      this.toolStripSeparator2.Name = "toolStripSeparator2";
+      this.toolStripSeparator2.Size = new System.Drawing.Size(210, 6);
+      // 
+      // 起始数字ToolStripMenuItem
+      // 
+      this.起始数字ToolStripMenuItem.Enabled = false;
+      this.起始数字ToolStripMenuItem.Name = "起始数字ToolStripMenuItem";
+      this.起始数字ToolStripMenuItem.Size = new System.Drawing.Size(213, 24);
+      this.起始数字ToolStripMenuItem.Text = "起始数字";
+      // 
+      // valFirstNum
+      // 
+      this.valFirstNum.Font = new System.Drawing.Font("更纱黑体 UI SC", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+      this.valFirstNum.Name = "valFirstNum";
+      this.valFirstNum.Size = new System.Drawing.Size(100, 22);
+      this.valFirstNum.Text = "1";
+      this.valFirstNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valFirstNum_KeyPress);
+      this.valFirstNum.TextChanged += new System.EventHandler(this.valFirstNum_TextChanged);
+      // 
+      // toolStripSeparator3
+      // 
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(210, 6);
+      // 
+      // 单词间分隔符ToolStripMenuItem
+      // 
+      this.单词间分隔符ToolStripMenuItem.Enabled = false;
+      this.单词间分隔符ToolStripMenuItem.Name = "单词间分隔符ToolStripMenuItem";
+      this.单词间分隔符ToolStripMenuItem.Size = new System.Drawing.Size(213, 24);
+      this.单词间分隔符ToolStripMenuItem.Text = "单词间分隔符";
+      // 
+      // valSplitText
+      // 
+      this.valSplitText.Font = new System.Drawing.Font("更纱黑体 UI SC", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+      this.valSplitText.Name = "valSplitText";
+      this.valSplitText.Size = new System.Drawing.Size(100, 22);
+      this.valSplitText.Text = " | ";
+      this.valSplitText.TextChanged += new System.EventHandler(this.valSplitText_TextChanged);
+      // 
+      // Shuffler
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.BackColor = System.Drawing.SystemColors.ControlDark;
+      this.ClientSize = new System.Drawing.Size(581, 390);
+      this.Controls.Add(this.strip);
+      this.Controls.Add(this.valOutput);
+      this.Controls.Add(this.valSent);
+      this.Font = new System.Drawing.Font("更纱黑体 UI SC Semibold", 11F, System.Drawing.FontStyle.Bold);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+      this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.Name = "Shuffler";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+      this.Text = "连词成句助手";
+      this.Load += new System.EventHandler(this.Shuffler_Load);
+      this.strip.ResumeLayout(false);
+      this.strip.PerformLayout();
+      this.ResumeLayout(false);
+      this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.TextBox valSent;
-        private System.Windows.Forms.CheckBox valAddNumber;
-        private System.Windows.Forms.CheckBox valAddMark;
-        private System.Windows.Forms.CheckBox valFixChnSymbol;
-        private System.Windows.Forms.NumericUpDown valFirstNumber;
         private System.Windows.Forms.TextBox valOutput;
-        private System.Windows.Forms.Button btnDoit;
-        private System.Windows.Forms.CheckBox valUpcase;
-        private System.Windows.Forms.CheckBox valNoSplit;
-        private System.Windows.Forms.CheckBox valKeepFirst;
-        private System.Windows.Forms.CheckBox valSort;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox valSplitter;
-        private System.Windows.Forms.Button btnCopyOutput;
-    }
+        private System.Windows.Forms.ToolStrip strip;
+    private System.Windows.Forms.ToolStripDropDownButton toolOpt;
+    private System.Windows.Forms.ToolStripMenuItem itemAddNumber;
+    private System.Windows.Forms.ToolStripMenuItem itemAddMark;
+    private System.Windows.Forms.ToolStripMenuItem itemFixChnSymbol;
+    private System.Windows.Forms.ToolStripMenuItem itemTolowercase;
+    private System.Windows.Forms.ToolStripMenuItem itemKeepfront;
+    private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+    private System.Windows.Forms.ToolStripMenuItem itemAsc;
+    private System.Windows.Forms.ToolStripMenuItem itemDesc;
+    private System.Windows.Forms.ToolStripMenuItem itemShuffle;
+    private System.Windows.Forms.ToolStripMenuItem itemAutoSplit;
+    private System.Windows.Forms.ToolStripButton btnRefresh;
+    private System.Windows.Forms.ToolStripButton toolStripButton1;
+    private System.Windows.Forms.ToolStripButton btnCopyResult;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripMenuItem 起始数字ToolStripMenuItem;
+    private System.Windows.Forms.ToolStripTextBox valFirstNum;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+    private System.Windows.Forms.ToolStripMenuItem 单词间分隔符ToolStripMenuItem;
+    private System.Windows.Forms.ToolStripTextBox valSplitText;
+  }
 }
