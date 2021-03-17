@@ -17,7 +17,6 @@ namespace HighlightHelper {
 
     public MainForm() {
       InitializeComponent();
-      Utils.InitFont();
     }
 
     private void ReadProfiles() {
@@ -53,9 +52,9 @@ namespace HighlightHelper {
       if (activeIndex >= profiles.Count) activeIndex = -1;
 
       // Labels
-      labelCountProfile.Text = profiles.Count.ToString();
-      if (activeIndex == -1) labelActiveProfile.Text = "<None>";
-      else labelActiveProfile.Text = String.Format("{0}  |  {1},{2},{3}", profiles[activeIndex].name, profiles[activeIndex].word.Count, profiles[activeIndex].wordnf.Count, profiles[activeIndex].phrase.Count);
+      // statusSplit.Text = "Total: " + profiles.Count.ToString();
+      if (activeIndex == -1) statusAct.Text = "当前配置: 无";
+      else statusAct.Text = string.Format("当前配置: <{0}> - {1},{2},{3}", profiles[activeIndex].name, profiles[activeIndex].word.Count, profiles[activeIndex].wordnf.Count, profiles[activeIndex].phrase.Count);
 
       // Profiles
       profileBox.Items.Clear();
@@ -77,17 +76,10 @@ namespace HighlightHelper {
     }
 
     private void MainForm_Load(object sender, EventArgs e) {
-      // Working Directory
-      labelWorkingDir.Text = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-      Environment.CurrentDirectory = labelWorkingDir.Text; // also set it to current dir
-      if (labelWorkingDir.Text.Length > 51) labelWorkingDir.Text = labelWorkingDir.Text.Substring(0, 51) + "...";
-
-      // Init profile array.
       ReadProfiles();
       UpdateDisplay();
-      label4.Text = "程序版本：[" + versionA.ToString() + "] " + versionB;
 
-      Utils.SetFont(this);
+      statusVer.Text = "版本: " + versionA.ToString() + " | " + versionB.ToString();
 
       AutoUpdater.InstalledVersion = versionA;
       AutoUpdater.Start("https://proj.imchinanb.xyz/update.xml");
@@ -143,11 +135,11 @@ namespace HighlightHelper {
       }
     }
 
-    private void btnShuffler_Click(object sender, EventArgs e) {
+    private void itemOpenShuffler_Click(object sender, EventArgs e) {
       (new Shuffler()).ShowDialog();
     }
 
-    private void btnCheckUpd_Click(object sender, EventArgs e) {
+    private void itemOpenGithub_Click(object sender, EventArgs e) {
       System.Diagnostics.Process.Start("https://github.com/ImChinaNB/HighlightHelper");
     }
   }

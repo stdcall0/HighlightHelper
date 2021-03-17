@@ -2,38 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace HighlightHelper {
   public partial class Shuffler : Form {
+    private Timer _typingTimer;
+
     public Shuffler() {
       InitializeComponent();
     }
     private void Shuffler_Load(object sender, EventArgs e) {
-      Utils.SetFont(this);
-      foreach (var i in strip.Items.OfType<ToolStripDropDownButton>()) {
-        i.Font = Utils.sarasa;
-        foreach (var j in i.DropDownItems.OfType<ToolStripMenuItem>()) {
-          j.Font = Utils.sarasa;
-        }
-      }
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripMenuItem>()) {
         i.CheckStateChanged += (object s, EventArgs ev) => refresh();
       }
-    }
-    public static void ShuffleList(List<string> list) {
-      RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
-      int n = list.Count;
-      while (n > 1) {
-        byte[] box = new byte[1];
-        do provider.GetBytes(box);
-        while (!(box[0] < n * (Byte.MaxValue / n)));
-        int k = (box[0] % n);
-        n--;
-        string value = list[k];
-        list[k] = list[n];
-        list[n] = value;
+      foreach (var i in toolOpt.DropDownItems.OfType<ToolStripTextBox>()) {
+        i.TextChanged += (object s, EventArgs ev) => refresh();
+      }
+      foreach (ToolStripMenuItem i in toolSort.DropDownItems) {
+        i.Click += (object s, EventArgs ev) => {
+          var j = s as ToolStripMenuItem;
+          if (!j.Checked) {
+            itemDesc.Checked = false;
+            itemShuffle.Checked = false;
+            itemAsc.Checked = false;
+            i.Checked = true;
+            refresh();
+          }
+        };
       }
     }
     private void refresh() {
@@ -61,7 +56,7 @@ namespace HighlightHelper {
       if (itemTolowercase.Checked) {
         S = S.ConvertAll(x => {
           if (x.Length == 0) return x;
-          return Char.ToLower(x[0]) + x.Substring(1);
+          return char.ToLower(x[0]) + x.Substring(1);
         }).ToList();
       }
 
@@ -97,7 +92,7 @@ namespace HighlightHelper {
           sub.Sort();
           sub.Reverse();
         } else {
-          ShuffleList(sub);
+          Utils.ShuffleList(sub);
         }
         r += String.Join(valSplitText.Text, sub);
         if (mark != "") {
@@ -112,15 +107,17 @@ namespace HighlightHelper {
     }
 
     private void valSent_TextChanged(object sender, EventArgs e) {
-      refresh();
-    }
+      if (_typingTimer == null) {
+        _typingTimer = new Timer();
+        _typingTimer.Interval = 300;
 
-    private void valSplitter_TextChanged(object sender, EventArgs e) {
-      refresh();
-    }
-
-    private void valFirstNumber_ValueChanged(object sender, EventArgs e) {
-      refresh();
+        _typingTimer.Tick += (object a, EventArgs b) => {
+          _typingTimer.Stop();
+          refresh();
+        };
+      }
+      _typingTimer.Stop();
+      _typingTimer.Start();
     }
 
     private void btnRefresh_Click(object sender, EventArgs e) {
@@ -130,48 +127,96 @@ namespace HighlightHelper {
     private void btnCopyResult_Click(object sender, EventArgs e) {
       Clipboard.SetText(valOutput.Text);
     }
-
-    private void valFirstNum_Click(object sender, EventArgs e) {
-      refresh();
+    private void btnPaste_Click(object sender, EventArgs e) {
+      valSent.Text = Clipboard.GetText();
     }
 
     private void valFirstNum_KeyPress(object sender, KeyPressEventArgs e) {
       e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
     }
 
-    private void valFirstNum_TextChanged(object sender, EventArgs e) {
-      refresh();
+    private void valOutput_TextChanged(object sender, EventArgs e) {
+
     }
 
-    private void valSplitText_TextChanged(object sender, EventArgs e) {
-      refresh();
+    private void toolOpt_Click(object sender, EventArgs e) {
+
+    }
+
+    private void itemAddNumber_Click(object sender, EventArgs e) {
+
+    }
+
+    private void itemAddMark_Click(object sender, EventArgs e) {
+
+    }
+
+    private void itemFixChnSymbol_Click(object sender, EventArgs e) {
+
+    }
+
+    private void itemTolowercase_Click(object sender, EventArgs e) {
+
+    }
+
+    private void itemKeepfront_Click(object sender, EventArgs e) {
+
+    }
+
+    private void itemAutoSplit_Click(object sender, EventArgs e) {
+
+    }
+
+    private void toolStripSeparator2_Click(object sender, EventArgs e) {
+
+    }
+
+    private void 起始数字ToolStripMenuItem_Click(object sender, EventArgs e) {
+
+    }
+
+    private void valFirstNum_Click(object sender, EventArgs e) {
+
+    }
+
+    private void toolStripSeparator3_Click(object sender, EventArgs e) {
+
+    }
+
+    private void 单词间分隔符ToolStripMenuItem_Click(object sender, EventArgs e) {
+
+    }
+
+    private void valSplitText_Click(object sender, EventArgs e) {
+
+    }
+
+    private void toolSort_Click(object sender, EventArgs e) {
+
     }
 
     private void itemAsc_Click(object sender, EventArgs e) {
-      if (!itemAsc.Checked) {
-        itemDesc.Checked = false;
-        itemShuffle.Checked = false;
-        itemAsc.Checked = true;
-      }
-      refresh();
+
     }
 
     private void itemDesc_Click(object sender, EventArgs e) {
-      if (!itemDesc.Checked) {
-        itemDesc.Checked = true;
-        itemShuffle.Checked = false;
-        itemAsc.Checked = false;
-      }
-      refresh();
+
     }
 
     private void itemShuffle_Click(object sender, EventArgs e) {
-      if (!itemShuffle.Checked) {
-        itemDesc.Checked = false;
-        itemShuffle.Checked = true;
-        itemAsc.Checked = false;
-      }
-      refresh();
+
+    }
+
+    private void toolStripSeparator1_Click(object sender, EventArgs e) {
+
+    }
+
+    private void toolStripButton1_Click(object sender, EventArgs e) {
+
+    }
+
+    private void strip_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
+
     }
   }
 }
