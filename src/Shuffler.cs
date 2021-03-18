@@ -45,6 +45,7 @@ namespace HighlightHelper {
       SwitchMode(man.cfg.shuffler.sortMethod);
     }
     private void Shuffler_Load(object sender, EventArgs e) {
+      LoadCfg();
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripMenuItem>()) {
         i.CheckStateChanged += (object s, EventArgs ev) => {
           refresh();

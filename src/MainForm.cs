@@ -68,6 +68,7 @@ namespace HighlightHelper {
         } else loaded = true;
       } else {
         man.cfg = new Config();
+        loaded = true;
       }
       statusSaved.Text = "Loaded";
 
