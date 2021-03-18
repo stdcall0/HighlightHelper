@@ -59,6 +59,28 @@ namespace HighlightHelper {
       }
     }
   };
+  public class ProfileOld : ICloneable<ProfileOld> {
+    private string namei;
+    public string name {
+      get { return String.IsNullOrEmpty(namei) ? "" : namei; }
+      set { namei = String.IsNullOrEmpty(value) || String.IsNullOrWhiteSpace(value) ? "" : value; }
+    }
+    public List<string> word, wordnf, phrase;
+    public bool Validate() {
+      return !String.IsNullOrEmpty(namei) && !String.IsNullOrWhiteSpace(namei);
+    }
+    public ProfileOld Clone() { // clone the object
+      return new ProfileOld {
+        name = name,
+        word = word.ConvertAll(b => b.Clone() as string),
+        wordnf = wordnf.ConvertAll(b => b.Clone() as string),
+        phrase = phrase.ConvertAll(b => b.Clone() as string)
+      };
+    }
+    public override string ToString() {
+      return name;
+    }
+  };
   enum SortMethod { ASC, DESC, SHUFFLE };
   class ShufflerConfig {
     public bool addNumber, addMark, replaceChnSymbol, firstToLowercase, keepAtFirst, autoSplit;
@@ -119,7 +141,10 @@ namespace HighlightHelper {
           case 0:
             cfg = new Config();
             cfg.activeProfile = BitConverter.ToInt32(ar, 0);
-            cfg.profiles = DeSerializer.DeSerialize<List<Profile>>(ar2);
+            cfg.profiles = DeSerializer.DeSerialize<List<ProfileOld>>(ar2)
+              .ConvertAll(x => {
+                return new Profile { name = x.name, word = x.word, wordnf = x.wordnf, phrase = x.phrase };
+              });
             cfg.shuffler = new ShufflerConfig();
             return true;
           case 1:
