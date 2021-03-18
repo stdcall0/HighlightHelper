@@ -78,7 +78,7 @@
     <Compile Include="ActivateForm.Designer.cs">
       <DependentUpon>ActivateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HighlightProfile.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="ListEditor.cs">
       <SubType>Form</SubType>
     </Compile>

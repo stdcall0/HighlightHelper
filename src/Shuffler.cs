@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using man = HighlightHelper.ConfigManager;
 
 namespace HighlightHelper {
   public partial class Shuffler : Form {
@@ -11,12 +12,50 @@ namespace HighlightHelper {
     public Shuffler() {
       InitializeComponent();
     }
+    private void SwitchMode(SortMethod sm) {
+      itemDesc.Checked = false;
+      itemShuffle.Checked = false;
+      itemAsc.Checked = false;
+      switch (sm) {
+        case SortMethod.ASC: itemAsc.Checked = true; break;
+        case SortMethod.DESC: itemDesc.Checked = true; break;
+        case SortMethod.SHUFFLE: itemShuffle.Checked = true; break;
+      }
+      man.cfg.shuffler.sortMethod = sm;
+    }
+    private void LoadCfg() {
+      itemAddMark.Checked = man.cfg.shuffler.addMark;
+      itemAddNumber.Checked = man.cfg.shuffler.addNumber;
+      itemFixChnSymbol.Checked = man.cfg.shuffler.replaceChnSymbol;
+      itemTolowercase.Checked = man.cfg.shuffler.firstToLowercase;
+      itemAutoSplit.Checked = man.cfg.shuffler.autoSplit;
+      valFirstNum.Text = man.cfg.shuffler.startNumber.ToString();
+      valSplitText.Text = man.cfg.shuffler.splitText;
+      SwitchMode(man.cfg.shuffler.sortMethod);
+    }
+    private void SaveCfg() {
+      man.cfg.shuffler.addMark = itemAddMark.Checked;
+      man.cfg.shuffler.addNumber = itemAddNumber.Checked;
+      man.cfg.shuffler.replaceChnSymbol = itemFixChnSymbol.Checked;
+      man.cfg.shuffler.firstToLowercase = itemTolowercase.Checked;
+      man.cfg.shuffler.autoSplit = itemAutoSplit.Checked;
+      man.cfg.shuffler.startNumber = 1;
+      decimal.TryParse(valFirstNum.Text, out man.cfg.shuffler.startNumber);
+      man.cfg.shuffler.splitText = valSplitText.Text;
+      SwitchMode(man.cfg.shuffler.sortMethod);
+    }
     private void Shuffler_Load(object sender, EventArgs e) {
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripMenuItem>()) {
-        i.CheckStateChanged += (object s, EventArgs ev) => refresh();
+        i.CheckStateChanged += (object s, EventArgs ev) => {
+          refresh();
+          SaveCfg();
+        };
       }
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripTextBox>()) {
-        i.TextChanged += (object s, EventArgs ev) => refresh();
+        i.TextChanged += (object s, EventArgs ev) => {
+          refresh();
+          SaveCfg();
+        };
       }
       foreach (ToolStripMenuItem i in toolSort.DropDownItems) {
         i.Click += (object s, EventArgs ev) => {
@@ -27,6 +66,7 @@ namespace HighlightHelper {
             itemAsc.Checked = false;
             i.Checked = true;
             refresh();
+            SaveCfg();
           }
         };
       }
@@ -133,90 +173,6 @@ namespace HighlightHelper {
 
     private void valFirstNum_KeyPress(object sender, KeyPressEventArgs e) {
       e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-    }
-
-    private void valOutput_TextChanged(object sender, EventArgs e) {
-
-    }
-
-    private void toolOpt_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemAddNumber_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemAddMark_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemFixChnSymbol_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemTolowercase_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemKeepfront_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemAutoSplit_Click(object sender, EventArgs e) {
-
-    }
-
-    private void toolStripSeparator2_Click(object sender, EventArgs e) {
-
-    }
-
-    private void 起始数字ToolStripMenuItem_Click(object sender, EventArgs e) {
-
-    }
-
-    private void valFirstNum_Click(object sender, EventArgs e) {
-
-    }
-
-    private void toolStripSeparator3_Click(object sender, EventArgs e) {
-
-    }
-
-    private void 单词间分隔符ToolStripMenuItem_Click(object sender, EventArgs e) {
-
-    }
-
-    private void valSplitText_Click(object sender, EventArgs e) {
-
-    }
-
-    private void toolSort_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemAsc_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemDesc_Click(object sender, EventArgs e) {
-
-    }
-
-    private void itemShuffle_Click(object sender, EventArgs e) {
-
-    }
-
-    private void toolStripSeparator1_Click(object sender, EventArgs e) {
-
-    }
-
-    private void toolStripButton1_Click(object sender, EventArgs e) {
-
-    }
-
-    private void strip_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
-
     }
   }
 }

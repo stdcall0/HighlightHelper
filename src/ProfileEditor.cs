@@ -13,14 +13,14 @@ namespace HighlightHelper {
     public partial class ProfileEditor : Form {
         private int selectedType = 0;
         private readonly List<Label> lbs;
-        private HighlightProfile target, targetBackup;
+        private Profile target, targetBackup;
 
         public ProfileEditor() {
             InitializeComponent();
             lbs = new List<Label> { label1, label2, label3 };
         }
 
-        public void setTarget(HighlightProfile profile) {
+        public void setTarget(Profile profile) {
             target = profile;
             targetBackup = target.Clone();
             UpdateBoldDisplay();
@@ -81,7 +81,7 @@ namespace HighlightHelper {
 
         private void btnClearAll_Click(object sender, EventArgs e) {
             if (MessageBox.Show(this, "真的要清空此配置内容吗?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
-                target = new HighlightProfile {
+                target = new Profile {
                     name = target.name
                 };
                 UpdateNumberDisplay();
@@ -126,7 +126,7 @@ namespace HighlightHelper {
             int a = 0, b = 0, c = 0;
             try {
                 string[] pastedRows = target.word.Concat(target.phrase).Concat(target.wordnf).ToArray();
-                HighlightProfile targetNew = new HighlightProfile { name = target.name };
+                Profile targetNew = new Profile { name = target.name };
                 foreach (string cell in pastedRows) {
                     if (Regex.IsMatch(cell, "^([A-Za-z])+$")) {
                         if (!targetNew.word.Contains(cell)) { ++a; targetNew.word.Add(cell); }

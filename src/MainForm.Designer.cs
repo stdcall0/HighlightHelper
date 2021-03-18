@@ -43,8 +43,9 @@ namespace HighlightHelper
       this.itemOpenGithub = new System.Windows.Forms.ToolStripMenuItem();
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.statusAct = new System.Windows.Forms.ToolStripStatusLabel();
-      this.statusVer = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusSplit = new System.Windows.Forms.ToolStripStatusLabel();
+      this.statusVer = new System.Windows.Forms.ToolStripStatusLabel();
+      this.statusSaved = new System.Windows.Forms.ToolStripStatusLabel();
       this.groupBoxBtn.SuspendLayout();
       this.menuStrip1.SuspendLayout();
       this.statusStrip1.SuspendLayout();
@@ -55,9 +56,9 @@ namespace HighlightHelper
       this.profileBox.BackColor = System.Drawing.Color.Linen;
       this.profileBox.Font = new System.Drawing.Font("微软雅黑", 11F);
       this.profileBox.FormattingEnabled = true;
-      this.profileBox.Location = new System.Drawing.Point(130, 41);
+      this.profileBox.Location = new System.Drawing.Point(161, 36);
       this.profileBox.Name = "profileBox";
-      this.profileBox.Size = new System.Drawing.Size(310, 28);
+      this.profileBox.Size = new System.Drawing.Size(513, 28);
       this.profileBox.TabIndex = 0;
       this.profileBox.SelectedIndexChanged += new System.EventHandler(this.profileBox_SelectedIndexChanged);
       // 
@@ -65,7 +66,7 @@ namespace HighlightHelper
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.label1.Location = new System.Drawing.Point(12, 44);
+      this.label1.Location = new System.Drawing.Point(20, 39);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(107, 20);
       this.label1.TabIndex = 1;
@@ -75,9 +76,9 @@ namespace HighlightHelper
       // 
       this.btnNewProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnNewProfile.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.btnNewProfile.Location = new System.Drawing.Point(28, 100);
+      this.btnNewProfile.Location = new System.Drawing.Point(24, 100);
       this.btnNewProfile.Name = "btnNewProfile";
-      this.btnNewProfile.Size = new System.Drawing.Size(74, 31);
+      this.btnNewProfile.Size = new System.Drawing.Size(102, 31);
       this.btnNewProfile.TabIndex = 2;
       this.btnNewProfile.Text = "新建...";
       this.btnNewProfile.UseVisualStyleBackColor = true;
@@ -87,9 +88,9 @@ namespace HighlightHelper
       // 
       this.btnEditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnEditProfile.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.btnEditProfile.Location = new System.Drawing.Point(93, 23);
+      this.btnEditProfile.Location = new System.Drawing.Point(145, 23);
       this.btnEditProfile.Name = "btnEditProfile";
-      this.btnEditProfile.Size = new System.Drawing.Size(74, 31);
+      this.btnEditProfile.Size = new System.Drawing.Size(102, 31);
       this.btnEditProfile.TabIndex = 3;
       this.btnEditProfile.Text = "编辑...";
       this.btnEditProfile.UseVisualStyleBackColor = true;
@@ -99,9 +100,9 @@ namespace HighlightHelper
       // 
       this.btnSelectProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnSelectProfile.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.btnSelectProfile.Location = new System.Drawing.Point(255, 23);
+      this.btnSelectProfile.Location = new System.Drawing.Point(419, 23);
       this.btnSelectProfile.Name = "btnSelectProfile";
-      this.btnSelectProfile.Size = new System.Drawing.Size(74, 31);
+      this.btnSelectProfile.Size = new System.Drawing.Size(102, 31);
       this.btnSelectProfile.TabIndex = 4;
       this.btnSelectProfile.Text = "激活";
       this.btnSelectProfile.UseVisualStyleBackColor = true;
@@ -112,9 +113,9 @@ namespace HighlightHelper
       this.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btnQuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnQuit.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.btnQuit.Location = new System.Drawing.Point(336, 23);
+      this.btnQuit.Location = new System.Drawing.Point(556, 23);
       this.btnQuit.Name = "btnQuit";
-      this.btnQuit.Size = new System.Drawing.Size(74, 31);
+      this.btnQuit.Size = new System.Drawing.Size(102, 31);
       this.btnQuit.TabIndex = 5;
       this.btnQuit.Text = "退出";
       this.btnQuit.UseVisualStyleBackColor = true;
@@ -129,7 +130,7 @@ namespace HighlightHelper
       this.groupBoxBtn.Font = new System.Drawing.Font("微软雅黑", 11F);
       this.groupBoxBtn.Location = new System.Drawing.Point(16, 77);
       this.groupBoxBtn.Name = "groupBoxBtn";
-      this.groupBoxBtn.Size = new System.Drawing.Size(423, 68);
+      this.groupBoxBtn.Size = new System.Drawing.Size(666, 68);
       this.groupBoxBtn.TabIndex = 6;
       this.groupBoxBtn.TabStop = false;
       this.groupBoxBtn.Text = "操作";
@@ -138,9 +139,9 @@ namespace HighlightHelper
       // 
       this.btnDeleteProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnDeleteProfile.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.btnDeleteProfile.Location = new System.Drawing.Point(174, 23);
+      this.btnDeleteProfile.Location = new System.Drawing.Point(282, 23);
       this.btnDeleteProfile.Name = "btnDeleteProfile";
-      this.btnDeleteProfile.Size = new System.Drawing.Size(74, 31);
+      this.btnDeleteProfile.Size = new System.Drawing.Size(102, 31);
       this.btnDeleteProfile.TabIndex = 4;
       this.btnDeleteProfile.Text = "删除";
       this.btnDeleteProfile.UseVisualStyleBackColor = true;
@@ -155,7 +156,7 @@ namespace HighlightHelper
             this.itemOpenGithub});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
-      this.menuStrip1.Size = new System.Drawing.Size(456, 28);
+      this.menuStrip1.Size = new System.Drawing.Size(694, 28);
       this.menuStrip1.TabIndex = 15;
       this.menuStrip1.Text = "menuStrip1";
       // 
@@ -179,10 +180,11 @@ namespace HighlightHelper
       this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusAct,
             this.statusSplit,
-            this.statusVer});
-      this.statusStrip1.Location = new System.Drawing.Point(0, 161);
+            this.statusVer,
+            this.statusSaved});
+      this.statusStrip1.Location = new System.Drawing.Point(0, 154);
       this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(456, 25);
+      this.statusStrip1.Size = new System.Drawing.Size(694, 25);
       this.statusStrip1.TabIndex = 16;
       this.statusStrip1.Text = "statusStrip1";
       // 
@@ -193,6 +195,13 @@ namespace HighlightHelper
       this.statusAct.Size = new System.Drawing.Size(31, 20);
       this.statusAct.Text = "act";
       // 
+      // statusSplit
+      // 
+      this.statusSplit.Font = new System.Drawing.Font("微软雅黑", 11F);
+      this.statusSplit.Name = "statusSplit";
+      this.statusSplit.Size = new System.Drawing.Size(536, 20);
+      this.statusSplit.Spring = true;
+      // 
       // statusVer
       // 
       this.statusVer.Font = new System.Drawing.Font("微软雅黑", 11F);
@@ -200,20 +209,21 @@ namespace HighlightHelper
       this.statusVer.Size = new System.Drawing.Size(32, 20);
       this.statusVer.Text = "ver";
       // 
-      // statusSplit
+      // statusSaved
       // 
-      this.statusSplit.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.statusSplit.Name = "statusSplit";
-      this.statusSplit.Size = new System.Drawing.Size(378, 20);
-      this.statusSplit.Spring = true;
+      this.statusSaved.Font = new System.Drawing.Font("微软雅黑", 11F);
+      this.statusSaved.Name = "statusSaved";
+      this.statusSaved.Size = new System.Drawing.Size(80, 20);
+      this.statusSaved.Text = "Loading...";
       // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoSize = true;
       this.BackColor = System.Drawing.Color.Linen;
       this.CancelButton = this.btnQuit;
-      this.ClientSize = new System.Drawing.Size(456, 186);
+      this.ClientSize = new System.Drawing.Size(694, 179);
       this.Controls.Add(this.statusStrip1);
       this.Controls.Add(this.btnNewProfile);
       this.Controls.Add(this.label1);
@@ -257,6 +267,7 @@ namespace HighlightHelper
     private System.Windows.Forms.ToolStripStatusLabel statusAct;
     private System.Windows.Forms.ToolStripStatusLabel statusVer;
     private System.Windows.Forms.ToolStripStatusLabel statusSplit;
+    private System.Windows.Forms.ToolStripStatusLabel statusSaved;
   }
 }
 

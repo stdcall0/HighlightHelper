@@ -8,14 +8,14 @@ using System.Security.Cryptography;
 
 namespace HighlightHelper {
   static class Utils {
-    [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+    /*[System.Runtime.InteropServices.DllImport("gdi32.dll")]
     private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
         IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
-    // private static PrivateFontCollection fonts = new PrivateFontCollection();
-    // public static Font sarasa;
+    private static PrivateFontCollection fonts = new PrivateFontCollection();
+    public static Font sarasa;
 
-    /* public static void InitFont() {
+    public static void InitFont() {
       byte[] fontData = Properties.Resources.sarasa_ui_sc_semibold;
       IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
       System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
@@ -46,7 +46,6 @@ namespace HighlightHelper {
         yield return nxt;
       }
     }
-
 
     public static void ShuffleList(List<string> list) {
       RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();

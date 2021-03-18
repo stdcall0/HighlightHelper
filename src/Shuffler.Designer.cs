@@ -24,7 +24,6 @@ namespace HighlightHelper {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Shuffler));
       this.valSent = new System.Windows.Forms.TextBox();
       this.valOutput = new System.Windows.Forms.TextBox();
       this.strip = new System.Windows.Forms.ToolStrip();
@@ -47,36 +46,39 @@ namespace HighlightHelper {
       this.itemShuffle = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.btnRefresh = new System.Windows.Forms.ToolStripButton();
-      this.btnCopyResult = new System.Windows.Forms.ToolStripButton();
-      this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
       this.btnPaste = new System.Windows.Forms.ToolStripButton();
+      this.btnCopyResult = new System.Windows.Forms.ToolStripButton();
       this.strip.SuspendLayout();
       this.SuspendLayout();
       // 
       // valSent
       // 
+      this.valSent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.valSent.Font = new System.Drawing.Font("微软雅黑", 11F);
       this.valSent.Location = new System.Drawing.Point(13, 33);
       this.valSent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.valSent.Multiline = true;
       this.valSent.Name = "valSent";
       this.valSent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.valSent.Size = new System.Drawing.Size(556, 184);
+      this.valSent.Size = new System.Drawing.Size(660, 291);
       this.valSent.TabIndex = 1;
       this.valSent.TextChanged += new System.EventHandler(this.valSent_TextChanged);
       // 
       // valOutput
       // 
+      this.valOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.valOutput.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.valOutput.Location = new System.Drawing.Point(13, 220);
+      this.valOutput.Location = new System.Drawing.Point(13, 327);
       this.valOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.valOutput.Multiline = true;
       this.valOutput.Name = "valOutput";
       this.valOutput.ReadOnly = true;
       this.valOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.valOutput.Size = new System.Drawing.Size(556, 181);
+      this.valOutput.Size = new System.Drawing.Size(660, 181);
       this.valOutput.TabIndex = 8;
-      this.valOutput.TextChanged += new System.EventHandler(this.valOutput_TextChanged);
       // 
       // strip
       // 
@@ -92,10 +94,9 @@ namespace HighlightHelper {
       this.strip.Location = new System.Drawing.Point(0, 0);
       this.strip.Name = "strip";
       this.strip.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-      this.strip.Size = new System.Drawing.Size(581, 27);
+      this.strip.Size = new System.Drawing.Size(685, 27);
       this.strip.TabIndex = 17;
       this.strip.Text = "toolStrip";
-      this.strip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.strip_ItemClicked);
       // 
       // toolOpt
       // 
@@ -118,7 +119,6 @@ namespace HighlightHelper {
       this.toolOpt.Name = "toolOpt";
       this.toolOpt.Size = new System.Drawing.Size(52, 24);
       this.toolOpt.Text = "选项";
-      this.toolOpt.Click += new System.EventHandler(this.toolOpt_Click);
       // 
       // itemAddNumber
       // 
@@ -129,7 +129,6 @@ namespace HighlightHelper {
       this.itemAddNumber.Name = "itemAddNumber";
       this.itemAddNumber.Size = new System.Drawing.Size(213, 24);
       this.itemAddNumber.Text = "添加序号";
-      this.itemAddNumber.Click += new System.EventHandler(this.itemAddNumber_Click);
       // 
       // itemAddMark
       // 
@@ -140,7 +139,6 @@ namespace HighlightHelper {
       this.itemAddMark.Name = "itemAddMark";
       this.itemAddMark.Size = new System.Drawing.Size(213, 24);
       this.itemAddMark.Text = "添加标点符号";
-      this.itemAddMark.Click += new System.EventHandler(this.itemAddMark_Click);
       // 
       // itemFixChnSymbol
       // 
@@ -151,7 +149,6 @@ namespace HighlightHelper {
       this.itemFixChnSymbol.Name = "itemFixChnSymbol";
       this.itemFixChnSymbol.Size = new System.Drawing.Size(213, 24);
       this.itemFixChnSymbol.Text = "替换全角标点为半角";
-      this.itemFixChnSymbol.Click += new System.EventHandler(this.itemFixChnSymbol_Click);
       // 
       // itemTolowercase
       // 
@@ -160,7 +157,6 @@ namespace HighlightHelper {
       this.itemTolowercase.Name = "itemTolowercase";
       this.itemTolowercase.Size = new System.Drawing.Size(213, 24);
       this.itemTolowercase.Text = "首字母转小写";
-      this.itemTolowercase.Click += new System.EventHandler(this.itemTolowercase_Click);
       // 
       // itemKeepfront
       // 
@@ -171,7 +167,6 @@ namespace HighlightHelper {
       this.itemKeepfront.Name = "itemKeepfront";
       this.itemKeepfront.Size = new System.Drawing.Size(213, 24);
       this.itemKeepfront.Text = "句首词保持最前";
-      this.itemKeepfront.Click += new System.EventHandler(this.itemKeepfront_Click);
       // 
       // itemAutoSplit
       // 
@@ -182,13 +177,11 @@ namespace HighlightHelper {
       this.itemAutoSplit.Name = "itemAutoSplit";
       this.itemAutoSplit.Size = new System.Drawing.Size(213, 24);
       this.itemAutoSplit.Text = "自动分句";
-      this.itemAutoSplit.Click += new System.EventHandler(this.itemAutoSplit_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
       this.toolStripSeparator2.Size = new System.Drawing.Size(210, 6);
-      this.toolStripSeparator2.Click += new System.EventHandler(this.toolStripSeparator2_Click);
       // 
       // 起始数字ToolStripMenuItem
       // 
@@ -197,7 +190,6 @@ namespace HighlightHelper {
       this.起始数字ToolStripMenuItem.Name = "起始数字ToolStripMenuItem";
       this.起始数字ToolStripMenuItem.Size = new System.Drawing.Size(213, 24);
       this.起始数字ToolStripMenuItem.Text = "起始数字";
-      this.起始数字ToolStripMenuItem.Click += new System.EventHandler(this.起始数字ToolStripMenuItem_Click);
       // 
       // valFirstNum
       // 
@@ -206,13 +198,11 @@ namespace HighlightHelper {
       this.valFirstNum.Size = new System.Drawing.Size(100, 27);
       this.valFirstNum.Text = "1";
       this.valFirstNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valFirstNum_KeyPress);
-      this.valFirstNum.Click += new System.EventHandler(this.valFirstNum_Click);
       // 
       // toolStripSeparator3
       // 
       this.toolStripSeparator3.Name = "toolStripSeparator3";
       this.toolStripSeparator3.Size = new System.Drawing.Size(210, 6);
-      this.toolStripSeparator3.Click += new System.EventHandler(this.toolStripSeparator3_Click);
       // 
       // 单词间分隔符ToolStripMenuItem
       // 
@@ -221,7 +211,6 @@ namespace HighlightHelper {
       this.单词间分隔符ToolStripMenuItem.Name = "单词间分隔符ToolStripMenuItem";
       this.单词间分隔符ToolStripMenuItem.Size = new System.Drawing.Size(213, 24);
       this.单词间分隔符ToolStripMenuItem.Text = "单词间分隔符";
-      this.单词间分隔符ToolStripMenuItem.Click += new System.EventHandler(this.单词间分隔符ToolStripMenuItem_Click);
       // 
       // valSplitText
       // 
@@ -229,7 +218,6 @@ namespace HighlightHelper {
       this.valSplitText.Name = "valSplitText";
       this.valSplitText.Size = new System.Drawing.Size(100, 27);
       this.valSplitText.Text = " | ";
-      this.valSplitText.Click += new System.EventHandler(this.valSplitText_Click);
       // 
       // toolSort
       // 
@@ -243,7 +231,6 @@ namespace HighlightHelper {
       this.toolSort.Name = "toolSort";
       this.toolSort.Size = new System.Drawing.Size(52, 24);
       this.toolSort.Text = "排序";
-      this.toolSort.Click += new System.EventHandler(this.toolSort_Click);
       // 
       // itemAsc
       // 
@@ -252,28 +239,24 @@ namespace HighlightHelper {
       this.itemAsc.Name = "itemAsc";
       this.itemAsc.Size = new System.Drawing.Size(180, 24);
       this.itemAsc.Text = "顺序";
-      this.itemAsc.Click += new System.EventHandler(this.itemAsc_Click);
       // 
       // itemDesc
       // 
       this.itemDesc.Name = "itemDesc";
       this.itemDesc.Size = new System.Drawing.Size(180, 24);
       this.itemDesc.Text = "倒序";
-      this.itemDesc.Click += new System.EventHandler(this.itemDesc_Click);
       // 
       // itemShuffle
       // 
       this.itemShuffle.Name = "itemShuffle";
       this.itemShuffle.Size = new System.Drawing.Size(180, 24);
       this.itemShuffle.Text = "乱序";
-      this.itemShuffle.Click += new System.EventHandler(this.itemShuffle_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.BackColor = System.Drawing.Color.Linen;
       this.toolStripSeparator1.Name = "toolStripSeparator1";
       this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-      this.toolStripSeparator1.Click += new System.EventHandler(this.toolStripSeparator1_Click);
       // 
       // btnRefresh
       // 
@@ -285,26 +268,6 @@ namespace HighlightHelper {
       this.btnRefresh.Text = "刷新";
       this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
       // 
-      // btnCopyResult
-      // 
-      this.btnCopyResult.BackColor = System.Drawing.Color.Linen;
-      this.btnCopyResult.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.btnCopyResult.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.btnCopyResult.Name = "btnCopyResult";
-      this.btnCopyResult.Size = new System.Drawing.Size(73, 24);
-      this.btnCopyResult.Text = "复制输出";
-      this.btnCopyResult.Click += new System.EventHandler(this.btnCopyResult_Click);
-      // 
-      // toolStripButton1
-      // 
-      this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-      this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.toolStripButton1.Name = "toolStripButton1";
-      this.toolStripButton1.Size = new System.Drawing.Size(23, 23);
-      this.toolStripButton1.Text = "toolStripButton1";
-      this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-      // 
       // btnPaste
       // 
       this.btnPaste.BackColor = System.Drawing.Color.Linen;
@@ -315,17 +278,27 @@ namespace HighlightHelper {
       this.btnPaste.Text = "粘贴输入";
       this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
       // 
+      // btnCopyResult
+      // 
+      this.btnCopyResult.BackColor = System.Drawing.Color.Linen;
+      this.btnCopyResult.Font = new System.Drawing.Font("微软雅黑", 11F);
+      this.btnCopyResult.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.btnCopyResult.Name = "btnCopyResult";
+      this.btnCopyResult.Size = new System.Drawing.Size(73, 24);
+      this.btnCopyResult.Text = "复制输出";
+      this.btnCopyResult.Click += new System.EventHandler(this.btnCopyResult_Click);
+      // 
       // Shuffler
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoSize = true;
       this.BackColor = System.Drawing.Color.Linen;
-      this.ClientSize = new System.Drawing.Size(581, 411);
+      this.ClientSize = new System.Drawing.Size(685, 518);
       this.Controls.Add(this.strip);
       this.Controls.Add(this.valOutput);
       this.Controls.Add(this.valSent);
       this.Font = new System.Drawing.Font("微软雅黑", 11F);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
       this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.Name = "Shuffler";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -354,7 +327,6 @@ namespace HighlightHelper {
     private System.Windows.Forms.ToolStripMenuItem itemShuffle;
     private System.Windows.Forms.ToolStripMenuItem itemAutoSplit;
     private System.Windows.Forms.ToolStripButton btnRefresh;
-    private System.Windows.Forms.ToolStripButton toolStripButton1;
     private System.Windows.Forms.ToolStripButton btnCopyResult;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
