@@ -42,7 +42,7 @@ namespace HighlightHelper {
       man.cfg.shuffler.startNumber = 1;
       decimal.TryParse(valFirstNum.Text, out man.cfg.shuffler.startNumber);
       man.cfg.shuffler.splitText = valSplitText.Text;
-      SwitchMode(man.cfg.shuffler.sortMethod);
+      man.cfg.shuffler.sortMethod = itemAsc.Checked ? SortMethod.ASC : (itemDesc.Checked ? SortMethod.DESC : SortMethod.SHUFFLE);
     }
     private void Shuffler_Load(object sender, EventArgs e) {
       LoadCfg();
