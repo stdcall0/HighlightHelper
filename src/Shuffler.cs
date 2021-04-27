@@ -8,11 +8,15 @@ using man = HighlightHelper.ConfigManager;
 namespace HighlightHelper {
   public partial class Shuffler : Form {
     private Timer _typingTimer;
+    private bool mode = true;
+
+    private string symbols = @"[,\.。!！\?？""“”'‘’;；]";
 
     public Shuffler() {
       InitializeComponent();
     }
-    private void SwitchMode(SortMethod sm) {
+
+    private void SwitchSortMethod(SortMethod sm) {
       itemDesc.Checked = false;
       itemShuffle.Checked = false;
       itemAsc.Checked = false;
@@ -23,6 +27,17 @@ namespace HighlightHelper {
       }
       man.cfg.shuffler.sortMethod = sm;
     }
+
+    private void SwitchMode() {
+      mode = !mode;
+      if (mode == false) {
+        labelMode.Text = "[连词成句]";
+      } else {
+        labelMode.Text = "[连句成篇]";
+      }
+      refresh();
+    }
+
     private void LoadCfg() {
       itemAddMark.Checked = man.cfg.shuffler.addMark;
       itemAddNumber.Checked = man.cfg.shuffler.addNumber;
@@ -31,8 +46,11 @@ namespace HighlightHelper {
       itemAutoSplit.Checked = man.cfg.shuffler.autoSplit;
       valFirstNum.Text = man.cfg.shuffler.startNumber.ToString();
       valSplitText.Text = man.cfg.shuffler.splitText;
-      SwitchMode(man.cfg.shuffler.sortMethod);
+      valSplitChars.Text = man.cfg.shuffler.splitChars;
+      SwitchSortMethod(man.cfg.shuffler.sortMethod);
+      mode = true;  SwitchMode();
     }
+
     private void SaveCfg() {
       man.cfg.shuffler.addMark = itemAddMark.Checked;
       man.cfg.shuffler.addNumber = itemAddNumber.Checked;
@@ -42,8 +60,10 @@ namespace HighlightHelper {
       man.cfg.shuffler.startNumber = 1;
       decimal.TryParse(valFirstNum.Text, out man.cfg.shuffler.startNumber);
       man.cfg.shuffler.splitText = valSplitText.Text;
+      man.cfg.shuffler.splitChars = valSplitChars.Text;
       man.cfg.shuffler.sortMethod = itemAsc.Checked ? SortMethod.ASC : (itemDesc.Checked ? SortMethod.DESC : SortMethod.SHUFFLE);
     }
+
     private void Shuffler_Load(object sender, EventArgs e) {
       LoadCfg();
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripMenuItem>()) {
@@ -72,6 +92,7 @@ namespace HighlightHelper {
         };
       }
     }
+
     private void refresh() {
       string raw = valSent.Text;
       if (itemFixChnSymbol.Checked) {
@@ -85,11 +106,13 @@ namespace HighlightHelper {
             .Replace("‘", "'")
             .Replace("’", "'");
       }
+      raw = raw.Replace("\r", "");
       List<string> S = raw.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
       if (itemAutoSplit.Checked) {
+        string splitter = @"(?<=[" + Regex.Replace(valSplitChars.Text, @"([\^\$\*\+\?\{\}\.\(\)\[\]])", "\\$1") + @"])\s+";
         List<string> res = new List<string>();
         foreach (string s in S) {
-          res.AddRange(Regex.Split(s, @"(?<=[\.。!！\?？])\s+"));
+          res.AddRange(Regex.Split(s, splitter));
         }
         S = res;
       }
@@ -100,50 +123,70 @@ namespace HighlightHelper {
           return char.ToLower(x[0]) + x.Substring(1);
         }).ToList();
       }
+      S.Remove("");
 
       valOutput.Text = "";
 
       decimal id = 1;
       decimal.TryParse(valFirstNum.Text, out id);
 
-      foreach (string s in S) {
-        List<string> w = Regex
-            .Replace(s, @"[,\.。!！\?？""“”'‘’;；]", "")
-            .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .ToList()
-            .ConvertAll(x => x.Trim()); // words
-        if (w.Count == 0) continue;
-        string mark = "", r = "";
-        if (itemAddMark.Checked) {
-          foreach (Match m in Regex.Matches(s, @"[,\.。!！\?？""“”'‘’;；]")) {
-            mark += s[m.Index];
-          }
-        }
-        List<string> sub;
-        if (itemKeepfront.Checked) {
-          sub = w.GetRange(1, w.Count - 1);
-          r = w[0];
-          if (w.Count > 1) r += valSplitText.Text;
-        } else {
-          sub = w;
-        }
+      if (mode) {
         if (itemAsc.Checked) {
-          sub.Sort();
+          S.Sort();
         } else if (itemDesc.Checked) {
-          sub.Sort();
-          sub.Reverse();
+          S.Sort();
+          S.Reverse();
         } else {
-          Utils.ShuffleList(sub);
+          Utils.ShuffleList(S);
         }
-        r += String.Join(valSplitText.Text, sub);
-        if (mark != "") {
-          r += "    (" + mark + ")";
+        foreach (string s in S) {
+          string r = s.Trim();
+          if (itemAddNumber.Checked) {
+            r = id.ToString() + ". " + r;
+            ++id;
+          }
+          valOutput.Text += r + "\r\n";
         }
-        if (itemAddNumber.Checked) {
-          r = id.ToString() + ". " + r;
-          ++id;
+      } else {
+        foreach (string s in S) {
+          List<string> w = Regex
+              .Replace(s, symbols, "")
+              .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+              .ToList()
+              .ConvertAll(x => x.Trim());
+          if (w.Count == 0) continue;
+          string mark = "", r = "";
+          if (itemAddMark.Checked) {
+            foreach (Match m in Regex.Matches(s, symbols)) {
+              mark += s[m.Index];
+            }
+          }
+          List<string> sub;
+          if (itemKeepfront.Checked) {
+            sub = w.GetRange(1, w.Count - 1);
+            r = w[0];
+            if (w.Count > 1) r += valSplitText.Text;
+          } else {
+            sub = w;
+          }
+          if (itemAsc.Checked) {
+            sub.Sort();
+          } else if (itemDesc.Checked) {
+            sub.Sort();
+            sub.Reverse();
+          } else {
+            Utils.ShuffleList(sub);
+          }
+          r += string.Join(valSplitText.Text, sub);
+          if (mark != "") {
+            r += "    (" + mark + ")";
+          }
+          if (itemAddNumber.Checked) {
+            r = id.ToString() + ". " + r;
+            ++id;
+          }
+          valOutput.Text += r + "\r\n";
         }
-        valOutput.Text += r + "\r\n";
       }
     }
 
@@ -168,12 +211,18 @@ namespace HighlightHelper {
     private void btnCopyResult_Click(object sender, EventArgs e) {
       Clipboard.SetText(valOutput.Text);
     }
+
     private void btnPaste_Click(object sender, EventArgs e) {
       valSent.Text = Clipboard.GetText();
     }
 
     private void valFirstNum_KeyPress(object sender, KeyPressEventArgs e) {
       e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+    }
+
+    private void btnToggleMode_Click(object sender, EventArgs e) {
+      SwitchMode();
+      refresh();
     }
   }
 }

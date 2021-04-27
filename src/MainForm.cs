@@ -67,7 +67,7 @@ namespace HighlightHelper {
           Close();
         } else loaded = true;
       } else {
-        man.cfg = new Config();
+        man.Init();
         loaded = true;
       }
       statusSaved.Text = "Loaded";
@@ -133,7 +133,11 @@ namespace HighlightHelper {
     }
 
     private void itemOpenGithub_Click(object sender, EventArgs e) {
-      System.Diagnostics.Process.Start("https://github.com/ImChinaNB/HighlightHelper");
+      // System.Diagnostics.Process.Start("https://github.com/ImChinaNB/HighlightHelper");
+
+      AutoUpdater.InstalledVersion = versionA;
+      AutoUpdater.UpdateMode = Mode.Normal;
+      AutoUpdater.Start("https://proj.imchinanb.xyz/update.xml");
     }
   }
 }

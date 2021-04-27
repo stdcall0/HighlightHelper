@@ -40,7 +40,7 @@ namespace HighlightHelper
       this.btnDeleteProfile = new System.Windows.Forms.Button();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.itemOpenShuffler = new System.Windows.Forms.ToolStripMenuItem();
-      this.itemOpenGithub = new System.Windows.Forms.ToolStripMenuItem();
+      this.itemCheckUpd = new System.Windows.Forms.ToolStripMenuItem();
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.statusAct = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusSplit = new System.Windows.Forms.ToolStripStatusLabel();
@@ -153,7 +153,7 @@ namespace HighlightHelper
       this.menuStrip1.Font = new System.Drawing.Font("微软雅黑", 11F);
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itemOpenShuffler,
-            this.itemOpenGithub});
+            this.itemCheckUpd});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(694, 28);
@@ -163,16 +163,16 @@ namespace HighlightHelper
       // itemOpenShuffler
       // 
       this.itemOpenShuffler.Name = "itemOpenShuffler";
-      this.itemOpenShuffler.Size = new System.Drawing.Size(81, 24);
-      this.itemOpenShuffler.Text = "连词成句";
+      this.itemOpenShuffler.Size = new System.Drawing.Size(77, 24);
+      this.itemOpenShuffler.Text = "Shuffler";
       this.itemOpenShuffler.Click += new System.EventHandler(this.itemOpenShuffler_Click);
       // 
-      // itemOpenGithub
+      // itemCheckUpd
       // 
-      this.itemOpenGithub.Name = "itemOpenGithub";
-      this.itemOpenGithub.Size = new System.Drawing.Size(107, 24);
-      this.itemOpenGithub.Text = "GitHub 主页";
-      this.itemOpenGithub.Click += new System.EventHandler(this.itemOpenGithub_Click);
+      this.itemCheckUpd.Name = "itemCheckUpd";
+      this.itemCheckUpd.Size = new System.Drawing.Size(81, 24);
+      this.itemCheckUpd.Text = "检查更新";
+      this.itemCheckUpd.Click += new System.EventHandler(this.itemOpenGithub_Click);
       // 
       // statusStrip1
       // 
@@ -262,7 +262,7 @@ namespace HighlightHelper
         private System.Windows.Forms.Button btnDeleteProfile;
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem itemOpenShuffler;
-    private System.Windows.Forms.ToolStripMenuItem itemOpenGithub;
+    private System.Windows.Forms.ToolStripMenuItem itemCheckUpd;
     private System.Windows.Forms.StatusStrip statusStrip1;
     private System.Windows.Forms.ToolStripStatusLabel statusAct;
     private System.Windows.Forms.ToolStripStatusLabel statusVer;

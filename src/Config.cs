@@ -4,9 +4,33 @@ using System.IO;
 using System.Text.RegularExpressions;
 using AutoCSer.BinarySerialize;
 
+using Config = HighlightHelper.ConfigV2;
+
 namespace HighlightHelper {
   public interface ICloneable<T> {
     T Clone();
+  };
+  public class ProfileV0 : ICloneable<ProfileV0> {
+    private string namei;
+    public string name {
+      get { return string.IsNullOrEmpty(namei) ? "" : namei; }
+      set { namei = string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value) ? "" : value; }
+    }
+    public List<string> word, wordnf, phrase;
+    public bool Validate() {
+      return !string.IsNullOrEmpty(namei) && !string.IsNullOrWhiteSpace(namei);
+    }
+    public ProfileV0 Clone() { // clone the object
+      return new ProfileV0 {
+        name = name,
+        word = word.ConvertAll(b => b.Clone() as string),
+        wordnf = wordnf.ConvertAll(b => b.Clone() as string),
+        phrase = phrase.ConvertAll(b => b.Clone() as string)
+      };
+    }
+    public override string ToString() {
+      return name;
+    }
   };
   public class Profile : ICloneable<Profile> { // for Highlighting
     public string name;
@@ -59,59 +83,136 @@ namespace HighlightHelper {
       }
     }
   };
-  public class ProfileOld : ICloneable<ProfileOld> {
-    private string namei;
-    public string name {
-      get { return String.IsNullOrEmpty(namei) ? "" : namei; }
-      set { namei = String.IsNullOrEmpty(value) || String.IsNullOrWhiteSpace(value) ? "" : value; }
-    }
-    public List<string> word, wordnf, phrase;
-    public bool Validate() {
-      return !String.IsNullOrEmpty(namei) && !String.IsNullOrWhiteSpace(namei);
-    }
-    public ProfileOld Clone() { // clone the object
-      return new ProfileOld {
-        name = name,
-        word = word.ConvertAll(b => b.Clone() as string),
-        wordnf = wordnf.ConvertAll(b => b.Clone() as string),
-        phrase = phrase.ConvertAll(b => b.Clone() as string)
-      };
-    }
-    public override string ToString() {
-      return name;
-    }
-  };
   enum SortMethod { ASC, DESC, SHUFFLE };
-  class ShufflerConfig {
+  class ShufflerConfigV0 {
     public bool addNumber, addMark, replaceChnSymbol, firstToLowercase, keepAtFirst, autoSplit;
     public decimal startNumber;
     public string splitText;
     public SortMethod sortMethod;
-    public ShufflerConfig() {
-      addNumber = addMark = replaceChnSymbol = keepAtFirst = autoSplit = true;
-      keepAtFirst = false;
+    public ShufflerConfigV0() {
+      addNumber = addMark = replaceChnSymbol = autoSplit = true;
+      firstToLowercase = keepAtFirst = false;
       startNumber = 1;
-      splitText = " | ";
+      splitText = " ";
       sortMethod = SortMethod.ASC;
     }
   };
-  class Config {
+  class ShufflerConfig {
+    public bool addNumber, addMark, replaceChnSymbol, firstToLowercase, keepAtFirst, autoSplit;
+    public decimal startNumber;
+    public string splitText, splitChars;
+    public SortMethod sortMethod;
+    public ShufflerConfig() {
+      addNumber = addMark = replaceChnSymbol = autoSplit = true;
+      firstToLowercase = keepAtFirst = false;
+      startNumber = 1;
+      splitText = " ";
+      splitChars = ".!?";
+      sortMethod = SortMethod.ASC;
+    }
+    public static ShufflerConfig fromV0(ShufflerConfigV0 v0) {
+      ShufflerConfig ret = new ShufflerConfig();
+      ret.addNumber = v0.addNumber;
+      ret.addMark = v0.addMark;
+      ret.replaceChnSymbol = v0.replaceChnSymbol;
+      ret.keepAtFirst = v0.keepAtFirst;
+      ret.autoSplit = v0.autoSplit;
+      ret.startNumber = v0.startNumber;
+      ret.splitText = v0.splitText.Clone() as string;
+      ret.sortMethod = v0.sortMethod;
+      return ret;
+    }
+  };
+
+  class ConfigV0 {
+    public readonly static int MAGIC = 0;
+    public static bool Check(int magic) {
+      return MAGIC == magic;
+    }
+
+    public List<ProfileV0> profiles;
+    public int activeProfile;
+    public ConfigV0() {
+      activeProfile = -1;
+      profiles = new List<ProfileV0>();
+    }
+    public static ConfigV0 Read(byte[] ar, int magic) {
+      ConfigV0 ret = new ConfigV0();
+      ret.activeProfile = magic;
+      ret.profiles = DeSerializer.DeSerialize<List<ProfileV0>>(ar);
+
+      return ret;
+    }
+    public ConfigV1 Convert() {
+      return new ConfigV1 {
+        profiles = profiles.ConvertAll(
+          new Converter<ProfileV0, Profile>((ProfileV0 v0) => {
+            return new Profile {
+              name = v0.name,
+              word = v0.word.ConvertAll(b => b.Clone() as string),
+              wordnf = v0.wordnf.ConvertAll(b => b.Clone() as string),
+              phrase = v0.phrase.ConvertAll(b => b.Clone() as string)
+            };
+          })
+          ),
+        activeProfile = activeProfile,
+        shuffler = new ShufflerConfigV0()
+      };
+    }
+  };
+
+  class ConfigV1 {
+    public readonly static int MAGIC = 0x5E4F1560;
+    public static bool Check(int magic) {
+      return MAGIC == magic;
+    }
+
+    public List<Profile> profiles;
+    public int activeProfile;
+    public ShufflerConfigV0 shuffler;
+    public ConfigV1() {
+      activeProfile = -1;
+      profiles = new List<Profile>();
+      shuffler = new ShufflerConfigV0();
+    }
+    public static ConfigV1 Read(byte[] ar, int magic) {
+      return DeSerializer.DeSerialize<ConfigV1>(ar);
+    }
+
+    public ConfigV2 Convert() {
+      return new ConfigV2() {
+        profiles = profiles,
+        activeProfile = activeProfile,
+        shuffler = ShufflerConfig.fromV0(shuffler)
+      };
+    }
+  };
+
+  class ConfigV2 {
+    public readonly static int MAGIC = 0x123400FF;
+    public static bool Check(int magic) {
+      return MAGIC == magic;
+    }
+
     public List<Profile> profiles;
     public int activeProfile;
     public ShufflerConfig shuffler;
-    public Config() {
+    public ConfigV2() {
       activeProfile = -1;
       profiles = new List<Profile>();
       shuffler = new ShufflerConfig();
     }
+    public static ConfigV2 Read(byte[] ar, int magic) {
+      return DeSerializer.DeSerialize<ConfigV2>(ar);
+    }
   };
+
   static class ConfigManager {
-    public static Config cfg;
     public static string filepath = "data.bin";
     public static string basedir = @"D:\WorkFinal";
-    private readonly static int[] MAGICS = new int[] {
-      0x5E4F1560
-    };
+
+    public static Config cfg;
+
     public static Profile getActiveProfile() {
       if (cfg.activeProfile >= cfg.profiles.Count) {
         cfg.activeProfile = -1;
@@ -119,12 +220,11 @@ namespace HighlightHelper {
       if (cfg.activeProfile == -1) return null;
       return cfg.profiles[cfg.activeProfile];
     }
-    private static int GetVersionMagic(byte[] ar) {
-      if (ar.Length < 4) return 0;
-      int magic = BitConverter.ToInt32(ar, 0);
-      if (magic == MAGICS[0]) return 1;
-      return 0;
+
+    public static void Init() {
+      if (cfg == null) cfg = new Config();
     }
+
     public static bool Read() {
       FileStream fs;
       try {
@@ -133,27 +233,24 @@ namespace HighlightHelper {
         if (sizeLong > 2100000000) {
           throw new OverflowException("Config file is too large to read.");
         }
+
         int size = (int) fs.Length;
         byte[] ar = new byte[size], ar2 = new byte[size - 4];
         fs.Read(ar, 0, size); fs.Close();
         Array.Copy(ar, 4, ar2, 0, ar2.Length);
-        switch (GetVersionMagic(ar)) {
-          case 0:
-            cfg = new Config();
-            cfg.activeProfile = BitConverter.ToInt32(ar, 0);
-            cfg.profiles = DeSerializer.DeSerialize<List<ProfileOld>>(ar2)
-              .ConvertAll(x => {
-                return new Profile { name = x.name, word = x.word, wordnf = x.wordnf, phrase = x.phrase };
-              });
-            cfg.shuffler = new ShufflerConfig();
-            return true;
-          case 1:
-            cfg = DeSerializer.DeSerialize<Config>(ar2);
-            return true;
-          default:
-            cfg = null;
-            return false;
+
+        int magic = BitConverter.ToInt32(ar, 0);
+
+        if (ConfigV2.Check(magic)) {
+          cfg = ConfigV2.Read(ar2, magic);
+        } else if (ConfigV1.Check(magic)) {
+          cfg = ConfigV1.Read(ar2, magic).Convert();
+        } else {
+          cfg = ConfigV0.Read(ar2, magic).Convert().Convert();
         }
+
+        return true;
+
       } catch { // unable to read
         cfg = null;
         return false;
@@ -162,16 +259,22 @@ namespace HighlightHelper {
     public static bool Write() {
       try {
         FileStream fs = new FileStream(filepath, FileMode.Create);
+
         byte[] ar = Serializer.Serialize(cfg);
         byte[] ar2 = new byte[ar.Length + 4];
-        Array.Copy(BitConverter.GetBytes(MAGICS[0]), ar2, 4);
+
+        Array.Copy(BitConverter.GetBytes(Config.MAGIC), ar2, 4);
         Array.Copy(ar, 0, ar2, 4, ar.Length);
+
         fs.Write(ar2, 0, ar2.Length);
         fs.Close();
+
         return true;
+
       } catch {
         return false;
       }
     }
   };
+
 }
