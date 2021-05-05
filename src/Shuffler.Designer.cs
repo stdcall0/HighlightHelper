@@ -52,6 +52,8 @@ namespace HighlightHelper {
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.btnToggleMode = new System.Windows.Forms.ToolStripButton();
       this.labelMode = new System.Windows.Forms.ToolStripLabel();
+      this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+      this.btnDebug = new System.Windows.Forms.ToolStripButton();
       this.strip.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -97,7 +99,9 @@ namespace HighlightHelper {
             this.btnCopyResult,
             this.toolStripSeparator4,
             this.btnToggleMode,
-            this.labelMode});
+            this.labelMode,
+            this.toolStripSeparator5,
+            this.btnDebug});
       this.strip.Location = new System.Drawing.Point(0, 0);
       this.strip.Name = "strip";
       this.strip.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
@@ -321,6 +325,19 @@ namespace HighlightHelper {
       this.labelMode.Size = new System.Drawing.Size(62, 24);
       this.labelMode.Text = "[mode]";
       // 
+      // toolStripSeparator5
+      // 
+      this.toolStripSeparator5.Name = "toolStripSeparator5";
+      this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
+      // 
+      // btnDebug
+      // 
+      this.btnDebug.Font = new System.Drawing.Font("微软雅黑", 11F);
+      this.btnDebug.Name = "btnDebug";
+      this.btnDebug.Size = new System.Drawing.Size(61, 24);
+      this.btnDebug.Text = "debug";
+      this.btnDebug.Click += new System.EventHandler(this.btnDebug_Click);
+      // 
       // Shuffler
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -373,5 +390,7 @@ namespace HighlightHelper {
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.ToolStripLabel labelMode;
     private System.Windows.Forms.ToolStripTextBox valSplitChars;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+    private System.Windows.Forms.ToolStripButton btnDebug;
   }
 }

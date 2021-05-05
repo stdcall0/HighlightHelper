@@ -109,10 +109,19 @@ namespace HighlightHelper {
       raw = raw.Replace("\r", "");
       List<string> S = raw.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
       if (itemAutoSplit.Checked) {
-        string splitter = @"(?<=[" + Regex.Replace(valSplitChars.Text, @"([\^\$\*\+\?\{\}\.\(\)\[\]])", "\\$1") + @"])\s+";
+        string splitChars = valSplitChars.Text;
         List<string> res = new List<string>();
         foreach (string s in S) {
-          res.AddRange(Regex.Split(s, splitter));
+          int lastPos = 0;
+          for (int i = 0; i < s.Length; ++i) {
+            if (splitChars.Contains(s[i])) {
+              res.Add(s.Substring(lastPos, i - lastPos + 1));
+              lastPos = i + 1;
+            }
+          }
+          if (lastPos < s.Length) {
+            res.Add(s.Substring(lastPos));
+          }
         }
         S = res;
       }
@@ -223,6 +232,10 @@ namespace HighlightHelper {
     private void btnToggleMode_Click(object sender, EventArgs e) {
       SwitchMode();
       refresh();
+    }
+
+    private void btnDebug_Click(object sender, EventArgs e) {
+      MessageBox.Show("DIMSTR " + valSplitChars.Text + "\r\nDIMCHARS " + valSplitText.Text, "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
     }
   }
 }
