@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using AutoCSer.BinarySerialize;
 
-using Config = HighlightHelper.ConfigV2;
+using Config = HighlightHelper.ConfigV3;
 
 namespace HighlightHelper {
   public interface ICloneable<T> {
@@ -97,12 +97,12 @@ namespace HighlightHelper {
       sortMethod = SortMethod.ASC;
     }
   };
-  class ShufflerConfig {
+  class ShufflerConfigV1 {
     public bool addNumber, addMark, replaceChnSymbol, firstToLowercase, keepAtFirst, autoSplit;
     public decimal startNumber;
     public string splitText, splitChars;
     public SortMethod sortMethod;
-    public ShufflerConfig() {
+    public ShufflerConfigV1() {
       addNumber = addMark = replaceChnSymbol = autoSplit = true;
       firstToLowercase = keepAtFirst = false;
       startNumber = 1;
@@ -110,8 +110,8 @@ namespace HighlightHelper {
       splitChars = ".!?";
       sortMethod = SortMethod.ASC;
     }
-    public static ShufflerConfig fromV0(ShufflerConfigV0 v0) {
-      ShufflerConfig ret = new ShufflerConfig();
+    public static ShufflerConfigV1 fromV0(ShufflerConfigV0 v0) {
+      ShufflerConfigV1 ret = new ShufflerConfigV1();
       ret.addNumber = v0.addNumber;
       ret.addMark = v0.addMark;
       ret.replaceChnSymbol = v0.replaceChnSymbol;
@@ -120,6 +120,34 @@ namespace HighlightHelper {
       ret.startNumber = v0.startNumber;
       ret.splitText = v0.splitText.Clone() as string;
       ret.sortMethod = v0.sortMethod;
+      return ret;
+    }
+  };
+  class ShufflerConfigV2 {
+    public bool addNumber, addMark, replaceChnSymbol, firstToLowercase, keepAtFirst, autoSplit;
+    public decimal startNumber;
+    public string sentenceSplit, outputSplit, wordSplit;
+    public SortMethod sortMethod;
+    public ShufflerConfigV2() {
+      addNumber = addMark = replaceChnSymbol = autoSplit = true;
+      firstToLowercase = keepAtFirst = false;
+      startNumber = 1;
+      outputSplit = " ";
+      wordSplit = "•,";
+      sentenceSplit = ".!?";
+      sortMethod = SortMethod.ASC;
+    }
+    public static ShufflerConfigV2 fromV1(ShufflerConfigV1 v1) {
+      ShufflerConfigV2 ret = new ShufflerConfigV2();
+      ret.addNumber = v1.addNumber;
+      ret.addMark = v1.addMark;
+      ret.replaceChnSymbol = v1.replaceChnSymbol;
+      ret.keepAtFirst = v1.keepAtFirst;
+      ret.autoSplit = v1.autoSplit;
+      ret.startNumber = v1.startNumber;
+      ret.outputSplit = v1.splitText.Clone() as string;
+      ret.sentenceSplit = v1.splitChars.Clone() as string;
+      ret.sortMethod = v1.sortMethod;
       return ret;
     }
   };
@@ -183,11 +211,10 @@ namespace HighlightHelper {
       return new ConfigV2() {
         profiles = profiles,
         activeProfile = activeProfile,
-        shuffler = ShufflerConfig.fromV0(shuffler)
+        shuffler = ShufflerConfigV1.fromV0(shuffler)
       };
     }
   };
-
   class ConfigV2 {
     public readonly static int MAGIC = 0x123400FF;
     public static bool Check(int magic) {
@@ -196,14 +223,39 @@ namespace HighlightHelper {
 
     public List<Profile> profiles;
     public int activeProfile;
-    public ShufflerConfig shuffler;
+    public ShufflerConfigV1 shuffler;
     public ConfigV2() {
       activeProfile = -1;
       profiles = new List<Profile>();
-      shuffler = new ShufflerConfig();
+      shuffler = new ShufflerConfigV1();
     }
     public static ConfigV2 Read(byte[] ar, int magic) {
       return DeSerializer.DeSerialize<ConfigV2>(ar);
+    }
+    public ConfigV3 Convert() {
+      return new ConfigV3() {
+        profiles = profiles,
+        activeProfile = activeProfile,
+        shuffler = ShufflerConfigV2.fromV1(shuffler)
+      };
+    }
+  };
+  class ConfigV3 {
+    public readonly static int MAGIC = 0x123401FF;
+    public static bool Check(int magic) {
+      return MAGIC == magic;
+    }
+
+    public List<Profile> profiles;
+    public int activeProfile;
+    public ShufflerConfigV2 shuffler;
+    public ConfigV3() {
+      activeProfile = -1;
+      profiles = new List<Profile>();
+      shuffler = new ShufflerConfigV2();
+    }
+    public static ConfigV3 Read(byte[] ar, int magic) {
+      return DeSerializer.DeSerialize<ConfigV3>(ar);
     }
   };
 
@@ -234,24 +286,26 @@ namespace HighlightHelper {
           throw new OverflowException("Config file is too large to read.");
         }
 
-        int size = (int) fs.Length;
+        int size = (int)fs.Length;
         byte[] ar = new byte[size], ar2 = new byte[size - 4];
         fs.Read(ar, 0, size); fs.Close();
         Array.Copy(ar, 4, ar2, 0, ar2.Length);
 
         int magic = BitConverter.ToInt32(ar, 0);
-
-        if (ConfigV2.Check(magic)) {
-          cfg = ConfigV2.Read(ar2, magic);
+        if (ConfigV3.Check(magic)) {
+          cfg = ConfigV3.Read(ar2, magic);
+        } else if (ConfigV2.Check(magic)) {
+          cfg = ConfigV2.Read(ar2, magic).Convert();
         } else if (ConfigV1.Check(magic)) {
-          cfg = ConfigV1.Read(ar2, magic).Convert();
+          cfg = ConfigV1.Read(ar2, magic).Convert().Convert();
         } else {
-          cfg = ConfigV0.Read(ar2, magic).Convert().Convert();
+          cfg = ConfigV0.Read(ar2, magic).Convert().Convert().Convert();
         }
 
         return true;
 
-      } catch { // unable to read
+      }
+      catch { // unable to read
         cfg = null;
         return false;
       }
@@ -271,7 +325,8 @@ namespace HighlightHelper {
 
         return true;
 
-      } catch {
+      }
+      catch {
         return false;
       }
     }

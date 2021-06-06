@@ -45,8 +45,9 @@ namespace HighlightHelper {
       itemTolowercase.Checked = man.cfg.shuffler.firstToLowercase;
       itemAutoSplit.Checked = man.cfg.shuffler.autoSplit;
       valFirstNum.Text = man.cfg.shuffler.startNumber.ToString();
-      valSplitText.Text = man.cfg.shuffler.splitText;
-      valSplitChars.Text = man.cfg.shuffler.splitChars;
+      valSentenceSplit.Text = man.cfg.shuffler.sentenceSplit.Replace(" ", "•");
+      valWordSplit.Text = man.cfg.shuffler.wordSplit.Replace(" ", "•");
+      valOutputSplit.Text = man.cfg.shuffler.outputSplit.Replace(" ", "•");
       SwitchSortMethod(man.cfg.shuffler.sortMethod);
       mode = true;  SwitchMode();
     }
@@ -59,8 +60,9 @@ namespace HighlightHelper {
       man.cfg.shuffler.autoSplit = itemAutoSplit.Checked;
       man.cfg.shuffler.startNumber = 1;
       decimal.TryParse(valFirstNum.Text, out man.cfg.shuffler.startNumber);
-      man.cfg.shuffler.splitText = valSplitText.Text;
-      man.cfg.shuffler.splitChars = valSplitChars.Text;
+      man.cfg.shuffler.sentenceSplit = getOriginal(valSentenceSplit);
+      man.cfg.shuffler.wordSplit = getOriginal(valWordSplit);
+      man.cfg.shuffler.outputSplit = getOriginal(valOutputSplit);
       man.cfg.shuffler.sortMethod = itemAsc.Checked ? SortMethod.ASC : (itemDesc.Checked ? SortMethod.DESC : SortMethod.SHUFFLE);
     }
 
@@ -74,6 +76,12 @@ namespace HighlightHelper {
       }
       foreach (var i in toolOpt.DropDownItems.OfType<ToolStripTextBox>()) {
         i.TextChanged += (object s, EventArgs ev) => {
+          ToolStripTextBox textBox = (ToolStripTextBox)s;
+          int caretIndex = textBox.SelectionStart;
+          int caretLength = textBox.SelectionLength;
+          textBox.Text = textBox.Text.Replace(" ", "•");
+          textBox.SelectionStart = caretIndex;
+          textBox.SelectionLength = caretLength;
           refresh();
           SaveCfg();
         };
@@ -93,6 +101,8 @@ namespace HighlightHelper {
       }
     }
 
+    private string getOriginal(ToolStripTextBox box) { return box.Text.Replace("•", " "); }
+
     private void refresh() {
       string raw = valSent.Text;
       if (itemFixChnSymbol.Checked) {
@@ -109,7 +119,7 @@ namespace HighlightHelper {
       raw = raw.Replace("\r", "");
       List<string> S = raw.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
       if (itemAutoSplit.Checked) {
-        string splitChars = valSplitChars.Text;
+        string splitChars = getOriginal(valSentenceSplit);
         List<string> res = new List<string>();
         foreach (string s in S) {
           int lastPos = 0;
@@ -158,23 +168,26 @@ namespace HighlightHelper {
         }
       } else {
         foreach (string s in S) {
-          List<string> w = Regex
-              .Replace(s, symbols, "")
-              .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+          char[] ws = (getOriginal(valWordSplit) + getOriginal(valSentenceSplit)).ToCharArray();
+          string mark = "", r = "";
+          if (itemAddMark.Checked) {
+            int f = s.IndexOfAny(ws);
+            while (f < s.Length && f != -1) {
+              mark += s[f];
+              f = s.IndexOfAny(ws, f + 1);
+            }
+          }
+
+          List<string> w = s
+              .Split(ws, StringSplitOptions.RemoveEmptyEntries)
               .ToList()
               .ConvertAll(x => x.Trim());
           if (w.Count == 0) continue;
-          string mark = "", r = "";
-          if (itemAddMark.Checked) {
-            foreach (Match m in Regex.Matches(s, symbols)) {
-              mark += s[m.Index];
-            }
-          }
           List<string> sub;
           if (itemKeepfront.Checked) {
             sub = w.GetRange(1, w.Count - 1);
             r = w[0];
-            if (w.Count > 1) r += valSplitText.Text;
+            if (w.Count > 1) r += getOriginal(valOutputSplit);
           } else {
             sub = w;
           }
@@ -186,9 +199,9 @@ namespace HighlightHelper {
           } else {
             Utils.ShuffleList(sub);
           }
-          r += string.Join(valSplitText.Text, sub);
+          r += string.Join(getOriginal(valOutputSplit), sub);
           if (mark != "") {
-            r += "    (" + mark + ")";
+            r += "    (" + mark.Replace(" ", "") + ")";
           }
           if (itemAddNumber.Checked) {
             r = id.ToString() + ". " + r;
@@ -235,7 +248,7 @@ namespace HighlightHelper {
     }
 
     private void btnDebug_Click(object sender, EventArgs e) {
-      MessageBox.Show("DIMSTR " + valSplitChars.Text + "\r\nDIMCHARS " + valSplitText.Text, "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+      MessageBox.Show("DIMSTR " + valWordSplit.Text + "\r\nDIMCHARS " + valSentenceSplit.Text + "\r\nDIMOUTPUT " + valOutputSplit.Text, "Debug Info", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
     }
   }
 }
