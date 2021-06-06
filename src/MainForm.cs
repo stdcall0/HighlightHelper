@@ -6,8 +6,8 @@ using man = HighlightHelper.ConfigManager;
 
 namespace HighlightHelper {
   public partial class MainForm : Form {
-    private readonly Version versionA = new Version(1, 4, 1, 0);
-    private readonly string versionB = "R 210505";
+    private readonly Version versionA = new Version(1, 5, 0, 0);
+    private readonly string versionB = "R 210606";
 
     private bool ischanging = false, loaded = false;
 
